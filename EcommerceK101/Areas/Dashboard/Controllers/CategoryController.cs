@@ -50,6 +50,46 @@ namespace EcommerceK101.Areas.Dashboard.Controllers
 
         }
 
+        public IActionResult Delete(int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            var delete = _context.Categories.FirstOrDefault(x => x.Id == id);
+            return View(delete);
+        }
+        [HttpPost]
+        public IActionResult Delete(Category category)
+        {
+            _context.Categories.Remove(category);
+            _context.SaveChanges();
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            var update = _context.Categories.FirstOrDefault(x => x.Id == id);
+            return View(update);
+        }
+        [HttpPost]
+        public IActionResult Edit(Category category)
+        {
+            var findCategory = _context.Categories.FirstOrDefault(x => x.CategoryName == category.CategoryName);
+            if (findCategory != null)
+            {
+                ViewBag.CategoryExist = "this Category is exist ";
+                return View();
+            }
+            var edit = _context.Categories.Update(category);
+            _context.SaveChanges();
+            return RedirectToAction(nameof(Index));
+        }
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

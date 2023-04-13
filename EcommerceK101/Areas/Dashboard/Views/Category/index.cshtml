@@ -1,4 +1,4 @@
-@model List<Category>
+@model IEnumerable<Category>
 <div class="container-fluid">
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
@@ -43,11 +43,11 @@
                                     @* @(article. ? "Active" : "De Aktive"); *@
                                 </th>
                                 <th class="d-flex">
-                                    <a href="/admin/Category/Detail/@category.Id" class="btn btn-secondary"> Deteil
+                                    <a href="/dashboard/Category/Detail/@category.Id" class="btn btn-secondary"> Deteil
                                     </a>
-                                    <a href="/admin/Category/delete/@category.Id" class="btn btn-danger w-50"> Delete
+                                    <a href="/dashboard/Category/Delete/@category.Id" class="btn btn-danger w-50"> Delete
                                     </a>
-                                    <a href="/admin/Category/Edit/@category.Id" class="btn btn-primary w-50">Update</a>
+                                    <a href="/dashboard/Category/Edit/@category.Id" class="btn btn-primary w-50">Update</a>
                                 </th>
                             </tr>
                         }
