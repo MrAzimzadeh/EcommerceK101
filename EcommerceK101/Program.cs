@@ -30,10 +30,13 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseAuthorization();
-
 app.UseAuthentication();
 app.UseAuthorization();
+
+
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.UseEndpoints(endpoints =>
 {
@@ -42,10 +45,5 @@ app.UseEndpoints(endpoints =>
         pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
     );
 });
-
-
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
