@@ -10,7 +10,7 @@ using WebApp.Data;
 
 namespace EcommerceK101.Areas.Dashboard.Controllers
 {
-    [Area(nameof(Dashboard))]
+    [Area("Dashboard")]
     public class CategoryController : Controller
     {
         private readonly AppDbContext _context;
@@ -20,20 +20,34 @@ namespace EcommerceK101.Areas.Dashboard.Controllers
             _context = context;
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
-            return View();
+            var catList = _context.Categories.ToList();
+            return View(catList);
         }
-
+        [HttpGet]
         public IActionResult Create()
         {
             return View();
         }
-
         [HttpPost]
         public IActionResult Create(Category category)
         {
-            return View();
+            if (!ModelState.IsValid)
+            {
+                return View(category);
+            }
+            var findCategory = _context.Categories.FirstOrDefault(x => x.CategoryName == category.CategoryName);
+            if (findCategory != null)
+            {
+                ViewBag.CategoryExist = "this Category is exist ";
+                return View();
+            }
+            _context.Categories.Add(category);
+            _context.SaveChanges();
+            return RedirectToAction(nameof(Index));
+
         }
 
 
