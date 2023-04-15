@@ -80,6 +80,7 @@ namespace EcommerceK101.Areas.Dashboard.Controllers
         [HttpPost]
         public IActionResult Edit(Category category)
         {
+
             var findCategory = _context.Categories.FirstOrDefault(x => x.CategoryName == category.CategoryName);
             if (findCategory != null)
             {
@@ -91,11 +92,5 @@ namespace EcommerceK101.Areas.Dashboard.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View("Error!");
-        }
     }
 }
