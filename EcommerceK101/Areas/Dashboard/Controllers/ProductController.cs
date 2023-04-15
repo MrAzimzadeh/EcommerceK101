@@ -10,7 +10,7 @@ namespace EcommerceK101.Areas.Dashboard.Controllers
     [Area(nameof(Dashboard))]
     public class ProductController : Controller
     {
-        private  readonly  AppDbContext _context;
+        private readonly AppDbContext _context;
         private readonly IWebHostEnvironment _env;
         public ProductController(AppDbContext context, IWebHostEnvironment env)
         {
@@ -20,7 +20,7 @@ namespace EcommerceK101.Areas.Dashboard.Controllers
 
         public IActionResult Index()
         {
-            var products = _context.Products.Include(x =>x.Category).ToList();
+            var products = _context.Products.Include(x => x.Category).ToList();
             return View(products);
         }
         [HttpGet]
@@ -32,7 +32,7 @@ namespace EcommerceK101.Areas.Dashboard.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Create(Product product , IFormFile Photo)
+        public IActionResult Create(Product product, IFormFile Photo)
         {
             var photo = ImageHelper.UploadSinglePhoto(Photo, _env);
             var seo_url = SeoUrlHelper.SeoUrl(product.Name);
@@ -42,5 +42,30 @@ namespace EcommerceK101.Areas.Dashboard.Controllers
             _context.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
+
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            var dele = _context.Products.FirstOrDefault(x => x.Id == id);
+
+
+
+
+            return View(dele);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(Product product)
+        {
+            _context.Products.Remove(product);
+            _context.SaveChanges();
+            return RedirectToAction(nameof(Index));
+        }
+
     }
 }

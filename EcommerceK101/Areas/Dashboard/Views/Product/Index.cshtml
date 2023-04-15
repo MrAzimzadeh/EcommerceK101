@@ -34,16 +34,20 @@
                         </tr>
                     </tfoot>
                     <tbody>
-                        
+
                         @foreach (var pr in Model)
                         {
                             <tr>
                                 <th>@pr.Id</th>
-                                <th>ww</th>
+                                <th class="w-25">
+                                    <img src="@pr.PhotoUrl" class="w-50"  />
+                                </th>
                                 <th>@pr.Name</th>
                                 <th>@pr.Price</th>
                                 <th>
-                                    Parametr
+                                    <a href="/dashboard/product/delete/@pr.Id" class="btn btn-primary">Delete</a>
+                                    <a class="btn btn-secondary">Update</a>
+                                    <a class="btn btn-success">Detail</a>
                                 </th>
                             </tr>
                         }
