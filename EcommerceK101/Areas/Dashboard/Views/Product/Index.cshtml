@@ -1,0 +1,55 @@
+﻿@model List<WebApp.Models.Product>
+<div class="container-fluid">
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">
+                <a href="/dashboard/Product/Create">Create</a>
+            </h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>#Id</th>
+                            <th>Photo</th>
+                            <th>Name</th>
+                            <th>Price </th>
+                            <th>
+                                Parametr
+                            </th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>#Id</th>
+                            <th>Photo</th>
+
+                            <th>Title</th>
+                            <th>Count</th>
+                            <th>
+                                Parametr
+                            </th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        
+                        @foreach (var pr in Model)
+                        {
+                            <tr>
+                                <th>@pr.Id</th>
+                                <th>ww</th>
+                                <th>@pr.Name</th>
+                                <th>@pr.Price</th>
+                                <th>
+                                    Parametr
+                                </th>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
