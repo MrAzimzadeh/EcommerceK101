@@ -1,4 +1,5 @@
-﻿using EcommerceK101.Helpers;
+﻿using EcommerceK101.Areas.Dashboard.ViewModels;
+using EcommerceK101.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -50,12 +51,7 @@ namespace EcommerceK101.Areas.Dashboard.Controllers
             {
                 return RedirectToAction(nameof(Index));
             }
-
             var dele = _context.Products.FirstOrDefault(x => x.Id == id);
-
-
-
-
             return View(dele);
         }
 
@@ -66,6 +62,59 @@ namespace EcommerceK101.Areas.Dashboard.Controllers
             _context.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
+
+        [HttpGet]
+        public IActionResult Detail(int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            var detail = _context.Products.FirstOrDefault(x => x.Id == id);
+
+            return View(detail);
+
+        }
+
+        [HttpGet]
+        public IActionResult Update(int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            var edit = _context.Products.FirstOrDefault(x => x.Id == id);
+            var categories = _context.Categories.ToList();
+
+            ProductVM productVm = new()
+            {
+                Products = edit,
+                Categories = categories
+            };
+
+            return View(productVm);
+        }
+
+        [HttpPost]
+        public IActionResult Update(Product product, IFormFile Photo)
+        {
+            var updateProduct = _context.Products.Find(product.Id);
+            if (product.PhotoUrl != null)
+            {
+                var photo = ImageHelper.UploadSinglePhoto(Photo, _env);
+                updateProduct.PhotoUrl = photo;
+            }
+            var seo_url = SeoUrlHelper.SeoUrl(product.Name);
+
+            updateProduct.SeoUrl = seo_url;
+            
+            _context.Products.Update(updateProduct);
+            _context.SaveChanges();
+            
+            return RedirectToAction(nameof(Index));
+        }
+
+
 
     }
 }
