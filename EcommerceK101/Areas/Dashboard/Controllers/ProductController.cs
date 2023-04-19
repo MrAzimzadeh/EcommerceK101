@@ -100,23 +100,19 @@ namespace EcommerceK101.Areas.Dashboard.Controllers
         public IActionResult Update(ProductVM productVm, int id, IFormFile Photo)
         {
             // VM gonderende id ile gondermeliyik yoxsa islemir 
-            var updateProduct = _context.Products.SingleOrDefault(x=>x.Id == id);
+            var updateProduct = _context.Products.SingleOrDefault(x => x.Id == id);
             if (productVm.Products.PhotoUrl != null)
             {
+
                 var photo = ImageHelper.UploadSinglePhoto(Photo, _env);
                 updateProduct.PhotoUrl = photo;
+
             }
-            
             var seo_url = SeoUrlHelper.SeoUrl(productVm.Products.Name);
             updateProduct.SeoUrl = seo_url;
-
             _context.Products.Update(updateProduct);
             _context.SaveChanges();
-            
             return RedirectToAction(nameof(Index));
         }
-
-
-
     }
 }
