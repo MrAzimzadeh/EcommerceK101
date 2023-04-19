@@ -4,15 +4,10 @@
 </div>
 <div class="col-lg-6 m-auto">
     <form class="row g-3" method="post" enctype="multipart/form-data">
-
-
         <div class="col-md-6">
             <label asp-for="Products.Name" class="form-label">Name</label>
             <input class="form-control" asp-for="Products.Name">
         </div>
-        @*<div class="form-group">
-        <input type="file" class="form-control" name="Photo" />
-        </div>*@
         <div class="col-md-6">
             <label asp-for="Products.Discount" class="form-label">Discount</label>
             <input type="text" class="form-control" asp-for="Products.Discount">
@@ -26,20 +21,13 @@
             <label asp-for="Products.Price" class="form-label">Price</label>
             <input type="text" asp-for="Products.Price" class="form-control">
         </div>
-        @*  <div class="col-md-6">
-        <label for="inputCity" class="form-label">City</label>
-        <input type="text" class="form-control" id="inputCity">
-        </div>*@
         <div class="col-md-2">
 
             <a href="@Model.Products.PhotoUrl" target="_blank">
                 <img src="@Model.Products.PhotoUrl" class="img-fluid w-auto" />
             </a>
             <input type="file" class="form-control" name="Photo" />
-
-
         </div>
-
         <div class="col-md-4">
             <label class="form-label">Category</label>
             <select name="CategoryId" class="form-control">
@@ -53,26 +41,15 @@
                     {
                         <option value="@cat.Id">@cat.CategoryName</option>
                     }
-
                 }
             </select>
-            @*<select asp-for="CategoryId" asp-items="@ViewBag.Categories" class="form-select">
-            <option value="">Sec</option>
-            </select>*@
         </div>
         <div class="col-md-2">
             <label asp-for="Products.Quantity" class="form-label">Quantity</label>
             <input type="text" class="form-control" asp-for="Products.Quantity">
         </div>
-
-
-        @* <div class="col-12">
-        <label asp-for="Quantity" class="form-label">Quantity</label>
-        <input type="text" class="form-control" asp-for="Quantity">
-        </div>*@
-
         <div class="col-12">
-            <button type="submit" class="btn btn-primary">Create </button>
+            <button type="submit" class="btn btn-primary"> Submit </button>
         </div>
     </form>
 </div>

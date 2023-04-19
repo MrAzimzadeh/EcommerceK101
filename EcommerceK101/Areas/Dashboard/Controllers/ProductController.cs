@@ -1,4 +1,5 @@
-﻿using EcommerceK101.Areas.Dashboard.ViewModels;
+﻿
+using EcommerceK101.Areas.Dashboard.ViewModels;
 using EcommerceK101.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -96,18 +97,19 @@ namespace EcommerceK101.Areas.Dashboard.Controllers
         }
 
         [HttpPost]
-        public IActionResult Update(Product product, IFormFile Photo)
+        public IActionResult Update(ProductVM productVm, int id, IFormFile Photo)
         {
-            var updateProduct = _context.Products.Find(product.Id);
-            if (product.PhotoUrl != null)
+            // VM gonderende id ile gondermeliyik yoxsa islemir 
+            var updateProduct = _context.Products.SingleOrDefault(x=>x.Id == id);
+            if (productVm.Products.PhotoUrl != null)
             {
                 var photo = ImageHelper.UploadSinglePhoto(Photo, _env);
                 updateProduct.PhotoUrl = photo;
             }
-            var seo_url = SeoUrlHelper.SeoUrl(product.Name);
-
-            updateProduct.SeoUrl = seo_url;
             
+            var seo_url = SeoUrlHelper.SeoUrl(productVm.Products.Name);
+            updateProduct.SeoUrl = seo_url;
+
             _context.Products.Update(updateProduct);
             _context.SaveChanges();
             
