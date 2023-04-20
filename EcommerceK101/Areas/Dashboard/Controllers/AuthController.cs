@@ -7,10 +7,11 @@ using WebApp.Data;
 namespace EcommerceK101.Areas.Dashboard.Controllers
 {
     [Area(nameof(Dashboard))]
-    public class  AuthController : Controller
+    public class AuthController : Controller
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManger;
+
         public AuthController(UserManager<User> userManager, SignInManager<User> signInManger)
         {
             _userManager = userManager;
@@ -19,12 +20,48 @@ namespace EcommerceK101.Areas.Dashboard.Controllers
 
         public IActionResult Login()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             return View();
         }
 
         [HttpPost]
-        public IActionResult Login(LoginDTO logindto)
+        public async Task<IActionResult> Login(LoginDTO loginDTO)
         {
+            if (!ModelState.IsValid) //todo = Bosluqu Yoxlayiriq
+            {
+                return View(loginDTO);
+            }
+
+            var checkEmail = await _userManager.FindByEmailAsync(loginDTO.Email);
+            if (checkEmail == null)
+            {
+                ViewBag.Error = "This Email Is not exist! "; // 
+                return View();
+            }
+
+            Microsoft
+                .AspNetCore
+                .Identity
+                .SignInResult
+                result =
+                    await _signInManger
+                        .PasswordSignInAsync(
+                            checkEmail,
+                            loginDTO.Password,
+                            isPersistent: loginDTO.RememberMe,
+                            lockoutOnFailure: true
+                        );
+
+            if (!result.Succeeded)
+            {
+                ModelState.AddModelError("Error", "Email or Password is invalid!!!");
+                return View();
+            }
+
             return RedirectToAction("Index", "Home");
         }
 
@@ -43,20 +80,17 @@ namespace EcommerceK101.Areas.Dashboard.Controllers
                 Name = registerdto.Name,
                 Email = registerdto.Email,
                 SurName = registerdto.Surname,
-                UserName = registerdto.Email ,
+                UserName = registerdto.Email,
                 PhotoUrl = "/img/avatar.png"
             };
             IdentityResult result = await _userManager.CreateAsync(newUser, registerdto.Password);
             //
-            if(result.Succeeded)
+            if (result.Succeeded)
             {
                 return RedirectToAction("Login");
             }
+
             return View(registerdto);
-
         }
-
-
-
     }
 }
