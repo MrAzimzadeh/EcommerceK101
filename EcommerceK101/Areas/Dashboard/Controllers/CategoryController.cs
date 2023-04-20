@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using EcommerceK101.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using WebApp.Data;
 
@@ -91,6 +92,16 @@ namespace EcommerceK101.Areas.Dashboard.Controllers
             _context.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
-
+        [HttpGet]
+        public IActionResult Detail(int id)
+        {
+            if (id == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            var detailChek = _context.Categories.FirstOrDefault(x => x.Id == id);
+            var products = _context.Products.Where(x => x.Category.Id == detailChek.Id).ToList();
+            return View(products);
+        }
     }
 }

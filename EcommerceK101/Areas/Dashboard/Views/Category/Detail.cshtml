@@ -1,0 +1,23 @@
+@model List<Product>
+
+@foreach (var item in Model)
+{
+    <div class="card mb-3" style="max-width: 540px;">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img src="@item.PhotoUrl" class="img-fluid rounded-start" alt="@item.SeoUrl">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">@item.Name</h5>
+                    <p class="card-text">
+                        @Html.Raw(item.Description.Substring(1,2))
+                        <br>
+                        <a href="/dashboard/Product/Detail/@item.Id" class="btn btn-primary w-100">Detail</a>
+                    </p>
+                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                </div>
+            </div>
+        </div>
+    </div>
+}

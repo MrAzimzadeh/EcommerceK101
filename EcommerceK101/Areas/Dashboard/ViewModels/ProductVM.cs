@@ -1,6 +1,5 @@
 ﻿using EcommerceK101.Models;
-using WebApp.Models;
-
+using EcommerceK101.Models;
 namespace EcommerceK101.Areas.Dashboard.ViewModels
 {
     public class ProductVM

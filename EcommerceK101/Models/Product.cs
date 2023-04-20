@@ -1,6 +1,6 @@
 ﻿using EcommerceK101.Models;
 
-namespace WebApp.Models
+namespace EcommerceK101.Models
 {
     public class Product
     {

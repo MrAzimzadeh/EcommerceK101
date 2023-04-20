@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using EcommerceK101.Models;
-using WebApp.Models;
+using EcommerceK101.Models;
 
 namespace WebApp.Data
 {

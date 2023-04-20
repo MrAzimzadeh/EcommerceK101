@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WebApp.Data;
-using WebApp.Models;
+using EcommerceK101.Models;
 
 namespace EcommerceK101.Areas.Dashboard.Controllers
 {
