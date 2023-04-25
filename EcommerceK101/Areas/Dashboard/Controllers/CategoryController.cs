@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using EcommerceK101.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -12,6 +13,7 @@ using WebApp.Data;
 namespace EcommerceK101.Areas.Dashboard.Controllers
 {
     [Area("Dashboard")]
+
     public class CategoryController : Controller
     {
         private readonly AppDbContext _context;
@@ -81,7 +83,6 @@ namespace EcommerceK101.Areas.Dashboard.Controllers
         [HttpPost]
         public IActionResult Edit(Category category)
         {
-
             var findCategory = _context.Categories.FirstOrDefault(x => x.CategoryName == category.CategoryName);
             if (findCategory != null)
             {

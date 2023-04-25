@@ -6,10 +6,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WebApp.Data;
 using EcommerceK101.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EcommerceK101.Areas.Dashboard.Controllers
 {
     [Area(nameof(Dashboard))]
+    [Authorize]
     public class ProductController : Controller
     {
         private readonly AppDbContext _context;

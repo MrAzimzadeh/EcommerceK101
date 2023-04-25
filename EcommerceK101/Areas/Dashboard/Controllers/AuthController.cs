@@ -1,5 +1,6 @@
 ﻿using EcommerceK101.Areas.DTOs;
 using EcommerceK101.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using WebApp.Data;
@@ -91,6 +92,13 @@ namespace EcommerceK101.Areas.Dashboard.Controllers
             }
 
             return View(registerdto);
+        }
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManger.SignOutAsync();
+            return RedirectToAction("Login", "Auth");
         }
     }
 }

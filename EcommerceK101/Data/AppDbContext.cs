@@ -15,6 +15,10 @@ namespace WebApp.Data
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Contact> Contacts { get; set; }
+        public DbSet<Article> Articles { get; set; }
+
+        public DbSet<Tag> Tags { get; set; }
+        public DbSet<ArticleTag> ArticleTags { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder builder)
