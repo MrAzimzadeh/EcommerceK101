@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using EcommerceK101.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using WebApp.Data;
 
@@ -77,7 +78,7 @@ namespace EcommerceK101.Areas.Dashboard.Controllers
             _context.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
-
+        // Tag Delete Get 
         public IActionResult Delete(int id)
         {
             if (!ModelState.IsValid)
@@ -87,7 +88,7 @@ namespace EcommerceK101.Areas.Dashboard.Controllers
             var delete = _context.Tags.FirstOrDefault(x => x.Id == id);
             return View(delete);
         }
-
+        // Tag Delete 
         [HttpPost]
         public IActionResult Delete(Tag tag)
         {
@@ -95,6 +96,21 @@ namespace EcommerceK101.Areas.Dashboard.Controllers
             _context.SaveChanges();
 
             return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet]
+        public IActionResult Detail(int id)
+        {
+            // null olub olmamayini baxiriq
+            if (!ModelState.IsValid)
+            {
+
+                return RedirectToAction(nameof(Index));
+            }
+            // id var yoxsa yox
+            var detailChek = _context.Tags.FirstOrDefault(x => x.Id == id);
+            // var products = _context.Products.Where(x => x.Category.Id == detailChek.Id).ToList();
+            return View(detailChek);
         }
 
     }

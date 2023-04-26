@@ -1,4 +1,5 @@
 ﻿using System.Security.Claims;
+using EcommerceK101.Helpers;
 using EcommerceK101.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -21,10 +22,7 @@ namespace EcommerceK101.Areas.Dashboard.Controllers
             _env = env;
         }
 
-        public ArticleController(AppDbContext context)
-        {
-            _context = context;
-        }
+
 
         public IActionResult Index()
         {
@@ -46,6 +44,10 @@ namespace EcommerceK101.Areas.Dashboard.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(Article article, IFormFile Photo, List<int> tagId)
         {
+            var photo = ImageHelper.UploadSinglePhoto(Photo, _env);
+            article.PhotoUrl = photo;
+
+
             var userId = _contextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             article.UserId = userId;
             var tags = _context.Tags.ToList();
@@ -63,6 +65,10 @@ namespace EcommerceK101.Areas.Dashboard.Controllers
                 tagList.Add(articleTag);
             }
 
+
+            article.CreatedDate = DateTime.Now;
+            article.UpdatedDate = DateTime.Now;
+            
             await _context.ArticleTags.AddRangeAsync(tagList); // listde Range istifade edirik '
             await _context.SaveChangesAsync();
 
