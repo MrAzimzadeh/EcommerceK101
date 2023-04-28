@@ -2,21 +2,28 @@
 <div class="container-fluid m-auto">
     <h4 class="text-center m-5">Create Article </h4>
 </div>
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger">
+        @ViewBag.Error
+    </div>
+}
+<div asp-validation-summary="All" class="text-center m-auto text-danger">
+
+</div>
 <div class="col-lg-6 m-auto">
     <form class="row g-3" asp-action="Create" asp-controller="Article" method="post" enctype="multipart/form-data">
-
         <div class="col-md-6">
             <label asp-for="Title" class="form-label">Name</label>
             <input class="form-control" asp-for="Title">
+            <span asp-validation-for="Title" class="text-danger"></span>
         </div>
-
         @*<div class="form-group">
         <input type="file" class="form-control" name="Photo" />
         </div>*@
-
         <div class="col-12">
             <label asp-for="Description" class="form-label">Description</label>
-            <textarea asp-for="Description" name="editor1" id="editor1" class="form-control">
+            <textarea asp-for="Description" name="Description" id="Desctiption" class="form-control">
         </textarea>
         </div>
         <label asp-for="Tags" class="form-label">Tags</label>
@@ -44,6 +51,6 @@
     <script src="https://cdn.ckeditor.com/4.20.1/standard/ckeditor.js"></script>
 
     <script>
-        CKEDITOR.replace('editor1');
+        CKEDITOR.replace('Desctiption');
     </script>
 }

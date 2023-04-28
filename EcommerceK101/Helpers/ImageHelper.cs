@@ -8,7 +8,7 @@
             string folderName = "";
             file.ContentType.Contains("image");
             folderName = "Uploads"; 
-            var path = "/" + folderName + "/" + Guid.NewGuid() + Path.GetExtension(file.FileName);
+            var path = "/" + folderName + "/" + Guid.NewGuid() +DateTime.Now.ToString("MM_dd_yyyy") + Path.GetExtension(file.FileName);
             using (var fileStream = new FileStream(env.WebRootPath + path, FileMode.Create))
             {
                 file.CopyTo(fileStream);

@@ -44,37 +44,54 @@ namespace EcommerceK101.Areas.Dashboard.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(Article article, IFormFile Photo, List<int> tagId)
         {
-            var photo = ImageHelper.UploadSinglePhoto(Photo, _env);
-            article.PhotoUrl = photo;
-
-
-            var userId = _contextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            article.UserId = userId;
-            var tags = _context.Tags.ToList();
-            await _context.Articles.AddAsync(article);
-            await _context.SaveChangesAsync();
-
-            List<ArticleTag> tagList = new();
-            for (int i = 0; i < tagId.Count; i++)
+            var tagList1 = _context.Tags.ToList();
+            ViewBag.Tags = new SelectList(tagList1, "Id", "Name");
+            if (!ModelState.IsValid)
             {
-                ArticleTag articleTag = new()
-                {
-                    ArtcleId = article.Id,
-                    TagId = tagId[i]
-                };
-                tagList.Add(articleTag);
+                return View();
             }
 
+            try
+            {
+                var photo = ImageHelper.UploadSinglePhoto(Photo, _env);
+                article.PhotoUrl = photo;
 
-            article.CreatedDate = DateTime.Now;
-            article.UpdatedDate = DateTime.Now;
-            
-            await _context.ArticleTags.AddRangeAsync(tagList); // listde Range istifade edirik '
-            await _context.SaveChangesAsync();
+                var userId = _contextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                article.UserId = userId;
+                var tags = _context.Tags.ToList();
+
+                await _context.Articles.AddAsync(article);
+                await _context.SaveChangesAsync();
+
+                List<ArticleTag> tagList = new();
+                for (int i = 0; i < tagId.Count; i++)
+                {
+                    ArticleTag articleTag = new()
+                    {
+                        ArtcleId = article.Id,
+                        TagId = tagId[i]
+                    };
+                    tagList.Add(articleTag);
+                }
+
+
+                article.CreatedDate = DateTime.Now;
+                article.UpdatedDate = DateTime.Now;
+
+                await _context.ArticleTags.AddRangeAsync(tagList); // listde Range istifade edirik '
+                await _context.SaveChangesAsync();
 
 
 
-            return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index));
+
+            }
+            catch (Exception e)
+            {
+                ViewBag.Error = e.Message;
+                return View();
+                throw;
+            }
         }
 
     }
