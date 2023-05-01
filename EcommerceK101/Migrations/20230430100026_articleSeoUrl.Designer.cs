@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApp.Data;
 
@@ -11,9 +12,11 @@ using WebApp.Data;
 namespace EcommerceK101.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230430100026_articleSeoUrl")]
+    partial class articleSeoUrl
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,6 +24,21 @@ namespace EcommerceK101.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("ArticleTag", b =>
+                {
+                    b.Property<int>("ArticlesId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TagsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ArticlesId", "TagsId");
+
+                    b.HasIndex("TagsId");
+
+                    b.ToTable("ArticleTag");
+                });
 
             modelBuilder.Entity("EcommerceK101.Models.Article", b =>
                 {
@@ -404,6 +422,21 @@ namespace EcommerceK101.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("ArticleTag", b =>
+                {
+                    b.HasOne("EcommerceK101.Models.Article", null)
+                        .WithMany()
+                        .HasForeignKey("ArticlesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EcommerceK101.Models.Tag", null)
+                        .WithMany()
+                        .HasForeignKey("TagsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("EcommerceK101.Models.Article", b =>
                 {
                     b.HasOne("EcommerceK101.Models.User", "User")
@@ -416,11 +449,11 @@ namespace EcommerceK101.Migrations
             modelBuilder.Entity("EcommerceK101.Models.ArticleTag", b =>
                 {
                     b.HasOne("EcommerceK101.Models.Article", "Article")
-                        .WithMany("ArticleTags")
+                        .WithMany()
                         .HasForeignKey("ArticleId");
 
                     b.HasOne("EcommerceK101.Models.Tag", "Tag")
-                        .WithMany("ArticleTags")
+                        .WithMany()
                         .HasForeignKey("TagId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -490,16 +523,6 @@ namespace EcommerceK101.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("EcommerceK101.Models.Article", b =>
-                {
-                    b.Navigation("ArticleTags");
-                });
-
-            modelBuilder.Entity("EcommerceK101.Models.Tag", b =>
-                {
-                    b.Navigation("ArticleTags");
                 });
 #pragma warning restore 612, 618
         }

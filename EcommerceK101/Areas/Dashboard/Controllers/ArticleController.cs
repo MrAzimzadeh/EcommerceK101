@@ -1,4 +1,5 @@
 ﻿using System.Security.Claims;
+using EcommerceK101.Areas.Dashboard.ViewModels;
 using EcommerceK101.Helpers;
 using EcommerceK101.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -8,7 +9,7 @@ using WebApp.Data;
 
 namespace EcommerceK101.Areas.Dashboard.Controllers
 {
-    [Area(nameof(Dashboard))]
+    [Area("Dashboard")]
     public class ArticleController : Controller
     {
         private readonly AppDbContext _context;
@@ -22,13 +23,12 @@ namespace EcommerceK101.Areas.Dashboard.Controllers
             _env = env;
         }
 
-
-
         public IActionResult Index()
         {
+
             var articles = _context.Articles
                 .Include(x => x.User)
-                .Include(x => x.Tags)
+                .Include(x => x.ArticleTags).ThenInclude(x=>x.Tag)
                 .ToList();
             return View(articles);
         }
@@ -44,13 +44,10 @@ namespace EcommerceK101.Areas.Dashboard.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(Article article, IFormFile Photo, List<int> tagId)
         {
+            var seo_url = SeoUrlHelper.SeoUrl(article.Title);
+            article.SeoUrl = seo_url;
             var tagList1 = _context.Tags.ToList();
             ViewBag.Tags = new SelectList(tagList1, "Id", "Name");
-            if (!ModelState.IsValid)
-            {
-                return View();
-            }
-
             try
             {
                 var photo = ImageHelper.UploadSinglePhoto(Photo, _env);
@@ -58,6 +55,7 @@ namespace EcommerceK101.Areas.Dashboard.Controllers
 
                 var userId = _contextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
                 article.UserId = userId;
+
                 var tags = _context.Tags.ToList();
 
                 await _context.Articles.AddAsync(article);
@@ -74,17 +72,12 @@ namespace EcommerceK101.Areas.Dashboard.Controllers
                     tagList.Add(articleTag);
                 }
 
-
                 article.CreatedDate = DateTime.Now;
                 article.UpdatedDate = DateTime.Now;
 
                 await _context.ArticleTags.AddRangeAsync(tagList); // listde Range istifade edirik '
                 await _context.SaveChangesAsync();
-
-
-
                 return RedirectToAction(nameof(Index));
-
             }
             catch (Exception e)
             {
@@ -93,6 +86,45 @@ namespace EcommerceK101.Areas.Dashboard.Controllers
                 throw;
             }
         }
+
+        public IActionResult Delete(int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
+            var delete = _context.Articles.FirstOrDefault(x => x.Id == id);
+            return View(delete);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(Article article)
+        {
+            var delete = _context.Articles.FirstOrDefault(x => x.Id == article.Id);
+            delete.IsDeleted = true;
+            delete.IsActive = false;
+            var result = _context.Articles.Update(delete);
+            _context.SaveChanges();
+            return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult Update(int? id)
+        {
+            var tags = _context.Tags.ToList();
+            ViewData["Tags"] = tags;
+            var tagList1 = _context.Tags.ToList();
+            var article = _context.Articles
+                .Include(x => x.User)
+                .Include(x => x.ArticleTags).ThenInclude(x => x.Tag)
+                .FirstOrDefault(x => x.Id == id);
+
+            return View(article);
+        }
+
+
+
+
 
     }
 }

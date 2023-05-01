@@ -53,13 +53,13 @@
                                 @pr.Title
                             </th>
                             <th>
-                                @pr.User.Name | @pr.User.SurName
+                                @pr.User.Name
                             </th>
                             <th>
-                                @foreach (var tags in pr.Tags)
+                                @foreach (var tags in pr.ArticleTags)
                                 {
                                     <span class="badge badge-primary">
-                                        @tags.Name
+                                        @tags.Tag.Name
                                     </span>
                                 }
                             </th>
@@ -89,9 +89,9 @@
                                 }
                             </th>
                             <th>
-                                <a href="/dashboard/Product/Delete/@pr.Id" class="btn btn-danger">Delete</a>
-                                <a href="/dashboard/Product/Update/@pr.Id" class="btn btn-success">Edit</a>
-                                <a href="/dashboard/Product/Detail/@pr.Id" class="btn btn-primary">Detail</a>
+                                <a href="/dashboard/Article/Delete/@pr.Id" class="btn btn-danger">Delete</a>
+                                <a href="/dashboard/Article/Update/@pr.Id" class="btn btn-success">Edit</a>
+                                <a href="/dashboard/Article/Detail/@pr.Id" class="btn btn-primary">Detail</a>
                             </th>
                         </tr>
                     }

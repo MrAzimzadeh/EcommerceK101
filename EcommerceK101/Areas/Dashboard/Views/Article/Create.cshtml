@@ -8,9 +8,7 @@
         @ViewBag.Error
     </div>
 }
-<div asp-validation-summary="All" class="text-center m-auto text-danger">
 
-</div>
 <div class="col-lg-6 m-auto">
     <form class="row g-3" asp-action="Create" asp-controller="Article" method="post" enctype="multipart/form-data">
         <div class="col-md-6">
@@ -26,10 +24,12 @@
             <textarea asp-for="Description" name="Description" id="Desctiption" class="form-control">
         </textarea>
         </div>
-        <label asp-for="Tags" class="form-label">Tags</label>
-        <select name="tagId" multiple asp-items="@ViewBag.Tags" class="form-select">
-            <option value="">Sec</option>
-        </select>
+        <div class="form-group">
+            <label asp-for="ArticleTags">Tags</label>
+            <select name="tagId" asp-items="ViewBag.Tags" class="form-control" multiple>
+            <option value=""></option>
+                </select>
+        </div>
 
         @*  <div class="col-md-6">
         <label for="inputCity" class="form-label">City</label>

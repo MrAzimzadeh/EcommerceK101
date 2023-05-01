@@ -20,7 +20,7 @@ namespace EcommerceK101.Controllers
 
         public IActionResult Detail(int id)
         {
-            var article = _context.Articles.Include(X=>X.User).Include(x=>x.Tags).FirstOrDefault(x => x.Id == id);
+            var article = _context.Articles.Include(X=>X.User).Include(x=>x.ArticleTags).ThenInclude(x=>x.Tag).FirstOrDefault(x => x.Id == id);
             ArticleDetailVM VM = new ArticleDetailVM()
             {
                 Article = article

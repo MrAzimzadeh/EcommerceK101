@@ -14,7 +14,7 @@
         </div>
         <div class="col-12">
             <label asp-for="Products.Description" class="form-label">Description</label>
-            <textarea asp-for="Products.Description" class="form-control">
+            <textarea asp-for="Products.Description" name="Description" id="Description" class="form-control">
         </textarea>
         </div>
         <div class="col-12">
@@ -60,6 +60,6 @@
     <script src="https://cdn.ckeditor.com/4.20.1/standard/ckeditor.js"></script>
 
     <script>
-        CKEDITOR.replace('editor1');
+        CKEDITOR.replace('Description');
     </script>
 }

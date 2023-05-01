@@ -21,7 +21,7 @@ builder.Services.ConfigureApplicationCookie(options =>
 });
 var app = builder.Build();
 
-app.UseExceptionHandler("/Home/Error");
+// app.UseExceptionHandler("/Home/Error");
 // Configure the HTTP request pipeline.
 
 if (!app.Environment.IsDevelopment())
@@ -44,7 +44,10 @@ app.UseEndpoints(endpoints =>
     endpoints.MapControllerRoute(
         name: "areas",
         pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}/{SeoUrl?}"
+    
     );
+    
+   
 });
 
 app.MapControllerRoute(

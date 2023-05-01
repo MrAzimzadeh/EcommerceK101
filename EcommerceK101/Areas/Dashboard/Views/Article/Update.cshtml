@@ -1,0 +1,44 @@
+﻿@model Article
+<div class="container-fluid m-auto">
+    <h4 class="text-center m-5">Create Product </h4>
+</div>
+<div class="col-lg-6 m-auto">
+    <form class="row g-3" method="post" enctype="multipart/form-data">
+        <div class="col-md-6">
+            <label asp-for="Title" class="form-label">Title</label>
+            <input class="form-control" asp-for="Title">
+        </div>
+
+        <div class="col-12">
+            <label asp-for="Description" class="form-label">Description</label>
+            <textarea asp-for="Description" name="Description" class="form-control">
+        </textarea>
+        </div>
+
+        <div class="col-md-2">
+
+            <a href="@Model.PhotoUrl" target="_blank">
+                <img src="@Model.PhotoUrl" class="img-fluid w-auto" />
+            </a>
+            <input type="file" class="form-control" name="Photo" />
+        </div>
+        <div class="form-group">
+            <label for="tags">Etiketler</label>
+          
+        </div>
+
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary"> Submit </button>
+        </div>
+    </form>
+</div>
+
+
+
+@section Scripts{
+    <script src="https://cdn.ckeditor.com/4.20.1/standard/ckeditor.js"></script>
+
+    <script>
+        CKEDITOR.replace('Description');
+    </script>
+}
