@@ -1,0 +1,34 @@
+﻿@model Article
+
+<div class="container">
+    <div class="card mb-3" style="max-width: 540px;">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img src="@Model.PhotoUrl" class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">@Model.Title</h5>
+                    <p class="card-text">@Html.Raw(Model.Description)</p>
+                    <p class="card-text">
+                        <small class="btn  text-body-secondary">Createa @Model.CreatedDate 
+                            <br/>
+                            Update : @Model.UpdatedDate
+                        </small>
+                    </p>
+                    <button type="button" class="btn btn-success"> User : @Model.User.Name </button>
+                    <div>
+
+                        @foreach (var item in Model.ArticleTags)
+                        {
+                            <button class="btn btn-dark">@item.Tag.Name</button>
+                        }
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

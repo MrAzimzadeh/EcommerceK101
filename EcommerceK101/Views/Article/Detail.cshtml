@@ -20,7 +20,7 @@
 			<div class="col-lg-8">
 				<div class="single-article-section">
 					<div class="single-article-text">
-						<div class="single-artcile-bg"></div>
+						<div class="single-artcile-bg" style="background-image: url(@Model.Article.PhotoUrl)"></div>
 						<p class="blog-meta">
 							<span class="author"><i class="fas fa-user"></i> @Model.Article.User.Name</span>
 							<span class="date"><i class="fas fa-calendar"></i> @Model.Article.CreatedDate</span>
@@ -35,7 +35,7 @@
 						<div class="comment-list">
 							<div class="single-comment-body">
 								<div class="comment-user-avater">
-									<img src="@Model.Article.PhotoUrl" alt="">
+									<img src="" alt="">
 								</div>
 								<div class="comment-text-body">
 									<h4>Jenny Joe <span class="comment-date">Aprl 26, 2020</span> <a href="#">reply</a></h4>
@@ -101,14 +101,14 @@
 					</div>
 					<div class="tag-section">
 						<h4>Tags</h4>
-						<ul>
-							<li><a href="single-news.html">Apple</a></li>
-							<li><a href="single-news.html">Strawberry</a></li>
-							<li><a href="single-news.html">BErry</a></li>
-							<li><a href="single-news.html">Orange</a></li>
-							<li><a href="single-news.html">Lemon</a></li>
-							<li><a href="single-news.html">Banana</a></li>
-						</ul>
+                        <ul>
+							
+							@foreach (var tags in Model.Article.ArticleTags)
+							{
+                            <li><a href="#">@tags.Tag.Name</a></li>
+
+							}
+                        </ul>
 					</div>
 				</div>
 			</div>
