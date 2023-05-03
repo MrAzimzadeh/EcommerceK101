@@ -105,7 +105,7 @@
 							
 							@foreach (var tags in Model.Article.ArticleTags)
 							{
-                            <li><a href="#">@tags.Tag.Name</a></li>
+                            <li><a href="/tag/taglist/@tags.Tag.Id">@tags.Tag.Name</a></li>
 
 							}
                         </ul>

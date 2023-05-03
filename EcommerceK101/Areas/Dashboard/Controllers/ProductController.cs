@@ -103,13 +103,13 @@ namespace EcommerceK101.Areas.Dashboard.Controllers
         {
             // VM gonderende id ile gondermeliyik yoxsa islemir 
             var updateProduct = _context.Products.SingleOrDefault(x => x.Id == id);
-            if (productVm.Products.PhotoUrl != null)
+            if (Photo != null)
             {
-
-                var photo = ImageHelper.UploadSinglePhoto(Photo, _env);
-                updateProduct.PhotoUrl = photo;
+                productVm.Products.PhotoUrl = ImageHelper.UploadSinglePhoto(Photo, _env);
+                _context.Products.Update(updateProduct);
 
             }
+
             var seo_url = SeoUrlHelper.SeoUrl(productVm.Products.Name);
             updateProduct.SeoUrl = seo_url;
             _context.Products.Update(updateProduct);

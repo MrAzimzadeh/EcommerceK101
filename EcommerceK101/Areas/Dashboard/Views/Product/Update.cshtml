@@ -4,6 +4,7 @@
 </div>
 <div class="col-lg-6 m-auto">
     <form class="row g-3" method="post" enctype="multipart/form-data">
+        <input type="hidden" asp-for="Products.PhotoUrl"/>
         <div class="col-md-6">
             <label asp-for="Products.Name" class="form-label">Name</label>
             <input class="form-control" asp-for="Products.Name">
@@ -24,9 +25,9 @@
         <div class="col-md-2">
 
             <a href="@Model.Products.PhotoUrl" target="_blank">
-                <img src="@Model.Products.PhotoUrl" class="img-fluid w-auto" />
+                <img src="@Model.Products.PhotoUrl" class="img-fluid w-auto"/>
             </a>
-            <input type="file" class="form-control" name="Photo" />
+            <input type="file" class="form-control" name="Photo"/>
         </div>
         <div class="col-md-4">
             <label class="form-label">Category</label>

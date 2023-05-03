@@ -111,7 +111,8 @@
             <div class="col-lg-8 offset-lg-2 text-center">
                 <div class="section-title">
                     <h3><span class="orange-text">Our</span> Products</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, fuga quas itaque eveniet beatae optio.</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, fuga quas itaque eveniet
+                        beatae optio.</p>
                 </div>
             </div>
         </div>
@@ -119,14 +120,15 @@
         <div class="row">
             @foreach (var pro in Model.Products)
             {
-                <div class="col-lg-4 col-md-6 text-center">
+                <div class="col-lg-4 col-md-6 text-center card-data">
                     <div class="single-product-item">
                         <div class="product-image">
-                            <a href="/Product/Detail/@pro.Id"><img src="@pro.PhotoUrl" alt="@pro.SeoUrl"></a>
+                            <a href="/Product/Detail/@pro.Id"><img class="product-photo" src="@pro.PhotoUrl"
+                                    alt="@pro.SeoUrl"></a>
                         </div>
-                        <h3>@pro.Name</h3>
+                        <h3 class="product-name">@pro.Name</h3>
                         <p class="product-price"><span>Per item</span> @pro.Price ₼</p>
-                        <a href="" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+                        <a class="cart-btn add-to-cart"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
                     </div>
                 </div>
             }
@@ -155,9 +157,26 @@
             <div class="content-column col-lg-6">
                 <h3><span class="orange-text">Deal</span> of the month</h3>
                 <h4>Hikan Strwaberry</h4>
-                <div class="text">Quisquam minus maiores repudiandae nobis, minima saepe id, fugit ullam similique! Beatae, minima quisquam molestias facere ea. Perspiciatis unde omnis iste natus error sit voluptatem accusant</div>
+                <div class="text">Quisquam minus maiores repudiandae nobis, minima saepe id, fugit ullam similique!
+                    Beatae, minima quisquam molestias facere ea. Perspiciatis unde omnis iste natus error sit voluptatem
+                    accusant</div>
                 <!--Countdown Timer-->
-                <div class="time-counter"><div class="time-countdown clearfix" data-countdown="2020/2/01"><div class="counter-column"><div class="inner"><span class="count">00</span>Days</div></div> <div class="counter-column"><div class="inner"><span class="count">00</span>Hours</div></div>  <div class="counter-column"><div class="inner"><span class="count">00</span>Mins</div></div>  <div class="counter-column"><div class="inner"><span class="count">00</span>Secs</div></div></div></div>
+                <div class="time-counter">
+                    <div class="time-countdown clearfix" data-countdown="2020/2/01">
+                        <div class="counter-column">
+                            <div class="inner"><span class="count">00</span>Days</div>
+                        </div>
+                        <div class="counter-column">
+                            <div class="inner"><span class="count">00</span>Hours</div>
+                        </div>
+                        <div class="counter-column">
+                            <div class="inner"><span class="count">00</span>Mins</div>
+                        </div>
+                        <div class="counter-column">
+                            <div class="inner"><span class="count">00</span>Secs</div>
+                        </div>
+                    </div>
+                </div>
                 <a href="cart.html" class="cart-btn mt-3"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
             </div>
         </div>
@@ -177,7 +196,9 @@
                         <div class="client-meta">
                             <h3>Saira Hakim <span>Local shop owner</span></h3>
                             <p class="testimonial-body">
-                                " Sed ut perspiciatis unde omnis iste natus error veritatis et  quasi architecto beatae vitae dict eaque ipsa quae ab illo inventore Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium "
+                                " Sed ut perspiciatis unde omnis iste natus error veritatis et quasi architecto beatae
+                                vitae dict eaque ipsa quae ab illo inventore Sed ut perspiciatis unde omnis iste natus
+                                error sit voluptatem accusantium "
                             </p>
                             <div class="last-icon">
                                 <i class="fas fa-quote-right"></i>
@@ -191,7 +212,9 @@
                         <div class="client-meta">
                             <h3>David Niph <span>Local shop owner</span></h3>
                             <p class="testimonial-body">
-                                " Sed ut perspiciatis unde omnis iste natus error veritatis et  quasi architecto beatae vitae dict eaque ipsa quae ab illo inventore Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium "
+                                " Sed ut perspiciatis unde omnis iste natus error veritatis et quasi architecto beatae
+                                vitae dict eaque ipsa quae ab illo inventore Sed ut perspiciatis unde omnis iste natus
+                                error sit voluptatem accusantium "
                             </p>
                             <div class="last-icon">
                                 <i class="fas fa-quote-right"></i>
@@ -205,7 +228,9 @@
                         <div class="client-meta">
                             <h3>Jacob Sikim <span>Local shop owner</span></h3>
                             <p class="testimonial-body">
-                                " Sed ut perspiciatis unde omnis iste natus error veritatis et  quasi architecto beatae vitae dict eaque ipsa quae ab illo inventore Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium "
+                                " Sed ut perspiciatis unde omnis iste natus error veritatis et quasi architecto beatae
+                                vitae dict eaque ipsa quae ab illo inventore Sed ut perspiciatis unde omnis iste natus
+                                error sit voluptatem accusantium "
                             </p>
                             <div class="last-icon">
                                 <i class="fas fa-quote-right"></i>
@@ -224,15 +249,19 @@
         <div class="row">
             <div class="col-lg-6 col-md-12">
                 <div class="abt-bg">
-                    <a href="https://www.youtube.com/watch?v=DBLlFWYcIGQ" class="video-play-btn popup-youtube"><i class="fas fa-play"></i></a>
+                    <a href="https://www.youtube.com/watch?v=DBLlFWYcIGQ" class="video-play-btn popup-youtube"><i
+                            class="fas fa-play"></i></a>
                 </div>
             </div>
             <div class="col-lg-6 col-md-12">
                 <div class="abt-text">
                     <p class="top-sub">Since Year 1999</p>
                     <h2>We are <span class="orange-text">Fruitkha</span></h2>
-                    <p>Etiam vulputate ut augue vel sodales. In sollicitudin neque et massa porttitor vestibulum ac vel nisi. Vestibulum placerat eget dolor sit amet posuere. In ut dolor aliquet, aliquet sapien sed, interdum velit. Nam eu molestie lorem.</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente facilis illo repellat veritatis minus, et labore minima mollitia qui ducimus.</p>
+                    <p>Etiam vulputate ut augue vel sodales. In sollicitudin neque et massa porttitor vestibulum ac vel
+                        nisi. Vestibulum placerat eget dolor sit amet posuere. In ut dolor aliquet, aliquet sapien sed,
+                        interdum velit. Nam eu molestie lorem.</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente facilis illo repellat
+                        veritatis minus, et labore minima mollitia qui ducimus.</p>
                     <a href="about.html" class="boxed-btn mt-4">know more</a>
                 </div>
             </div>
@@ -257,7 +286,8 @@
             <div class="col-lg-8 offset-lg-2 text-center">
                 <div class="section-title">
                     <h3><span class="orange-text">Our</span> News</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, fuga quas itaque eveniet beatae optio.</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, fuga quas itaque eveniet
+                        beatae optio.</p>
                 </div>
             </div>
         </div>
@@ -268,15 +298,18 @@
                 <div class="col-lg-4 col-md-6">
                     <div class="single-latest-news">
                         <a href="">
-                            <div style="background-image: url(@art.PhotoUrl)" class="latest-news-bg news-bg-1"></div></a>
+                            <div style="background-image: url(@art.PhotoUrl)" class="latest-news-bg news-bg-1"></div>
+                        </a>
                         <div class="news-text-box">
                             <h3><a href="/Article/detail/@art.Id">@art.Title</a></h3>
                             <p class="blog-meta">
                                 <span class="author"><i class="fas fa-user"></i> @art.User.Name</span>
-                                <span class="date"><i class="fas fa-calendar"></i> @art.CreatedDate.ToString("MM/dd/yyyy")</span>
+                                <span class="date"><i class="fas fa-calendar"></i>
+                                    @art.CreatedDate.ToString("MM/dd/yyyy")</span>
                             </p>
                             <p class="excerpt">@Html.Raw(art.Description)</p>
-                            <a href="single-news.html" class="read-more-btn">read more <i class="fas fa-angle-right"></i></a>
+                            <a href="single-news.html" class="read-more-btn">read more <i
+                                    class="fas fa-angle-right"></i></a>
                         </div>
                     </div>
                 </div>
@@ -290,3 +323,34 @@
     </div>
 </div>
 <!-- end latest news -->
+
+@section Scripts{
+    <script>
+        const button = document.querySelectorAll(".add-to-cart")
+        const productName = document.querySelectorAll(".product-name")
+        const productPrice = document.querySelectorAll(".product-price")
+        const productPhoto = document.querySelectorAll(".product-photo")
+        for (let i = 0; i < button.length; i++) {
+            button[i].addEventListener("click", function () {
+
+                addToLs(productName[i].innerText, productPrice[i].innerText, productPhoto[i].currentSrc)
+            })
+        }
+       function addToLs(name, price, photoUrl) {
+            console.log(`${name} | price ${price} | photo ${photoUrl}`)
+            let data =
+            {
+                name: name,
+                price: price,
+                photo: photoUrl,
+                quantity: 1,
+            }
+                 var cartItems = JSON.parse(localStorage.getItem("card"))
+            if(cartItems ==   null){
+                localStorage.setItem("card", JSON.stringify([data]))
+            }else{
+                localStorage.setItem("card", JSON.stringify([...cartItems , data]))
+            }         
+        }
+    </script>
+}

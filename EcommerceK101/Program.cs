@@ -21,7 +21,7 @@ builder.Services.ConfigureApplicationCookie(options =>
 });
 var app = builder.Build();
 
-// app.UseExceptionHandler("/Home/Error");
+app.UseExceptionHandler("/Home/Error");
 // Configure the HTTP request pipeline.
 
 if (!app.Environment.IsDevelopment())
@@ -53,7 +53,5 @@ app.UseEndpoints(endpoints =>
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
-
-
 
 app.Run();

@@ -1,0 +1,43 @@
+@model IEnumerable<ArticleTag>
+<div class="hero-area hero-bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9 offset-lg-2 text-center">
+                <div class="hero-text">
+                    <div class="hero-text-tablecell">
+                        <p class="subtitle">Fresh & Organic</p>
+                        <h1>@ViewData["TagName"]</h1>
+                        <div class="hero-btns">
+                            <a href="shop.html" class="boxed-btn">Fruit Collection</a>
+                            <a href="contact.html" class="bordered-btn">Contact Us</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr />
+<!-- end hero area -->
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-lg-4 col-md-6">
+            <div class="single-latest-news">
+                <a href="/article/detail/@item.Article.Id">
+                    <div class="latest-news-bg news-bg-1" style="background-image: url(@item.Article.PhotoUrl)"></div>
+                </a>
+                <div class="news-text-box">
+                    <h3><a href="/article/detail/@item.Article.Id">@item.Article.Title</a></h3>
+                    <p class="blog-meta">
+                        <span class="author"><i class="fas fa-user"></i>@item.Article.User.Name</span>
+                        <span class="date"><i class="fas fa-calendar"></i> @item.Article.CreatedDate.ToString()</span>
+                    </p>
+                    <p class="excerpt">@Html.Raw(item.Article.Description)</p>
+                    <a href="/article/deatil/@item.Article.Id" class="read-more-btn">read more <i class="fas fa-angle-right"></i></a>
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
