@@ -105,8 +105,7 @@ namespace EcommerceK101.Areas.Dashboard.Controllers
             var updateProduct = _context.Products.SingleOrDefault(x => x.Id == id);
             if (Photo != null)
             {
-                productVm.Products.PhotoUrl = ImageHelper.UploadSinglePhoto(Photo, _env);
-                _context.Products.Update(updateProduct);
+                updateProduct.PhotoUrl = ImageHelper.UploadSinglePhoto(Photo, _env);
 
             }
 
