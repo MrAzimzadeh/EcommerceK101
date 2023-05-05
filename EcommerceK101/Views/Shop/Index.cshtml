@@ -26,15 +26,16 @@
         <div class="row product-lists">
             @foreach (var item in Model.Products)
             {
-            
+
                 <div class="col-lg-4 col-md-6 text-center cat_@item.CategoryId">
+                    <div style="display: none;" class="product-id">@item.Id</div>
                     <div class="single-product-item">
                         <div class="product-image">
-                            <a href="/product/detail/@item.Id"><img src="@item.PhotoUrl" alt=""></a>
+                            <a href="/product/detail/@item.Id"><img class="product-photo" src="@item.PhotoUrl" alt=""></a>
                         </div>
-                        <h3>@item.Name</h3>
+                        <h3 class="product-name">@item.Name</h3>
                         <p class="product-price"><span>Per item </span> @item.Price$ </p>
-                        <a href="#" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+                        <a class="cart-btn add-to-cart"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
                     </div>
                 </div>
             }
@@ -85,3 +86,60 @@
     </div>
 </div>
 <!-- end logo carousel -->
+
+@section Scripts{
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+
+        const button = document.querySelectorAll(".add-to-cart")
+        const productName = document.querySelectorAll(".product-name")
+        const productPrice = document.querySelectorAll(".product-price")
+        const productPhoto = document.querySelectorAll(".product-photo")
+        const productId = document.querySelectorAll(".product-id")
+
+        for (let i = 0; i < button.length; i++) {
+            button[i].addEventListener("click", function () {
+                AddToLs(productId[i].innerText, productName[i].innerText, productPrice[i].innerText, productPhoto[i].currentSrc)
+            })
+        }
+
+        function AddToLs(id, name, price, photoUrl) {
+            let data = {
+
+                id: id,
+                name: name,
+                price: price,
+                photo: photoUrl,
+                quatity: 1
+            }
+
+            console.log(id)
+
+            var cartItems = JSON.parse(localStorage.getItem("card"))
+
+            if (cartItems == null) {
+                localStorage.setItem("card", JSON.stringify([data]))
+            } else {
+                let result = cartItems.find(x => x.id == id)
+                if (result != undefined) {
+                    localStorage.removeItem("card", cartItems)
+                    let resQuantity = result.quatity += 1
+                    localStorage.setItem("card", JSON.stringify(cartItems))
+                } else {
+                    localStorage.setItem("card", JSON.stringify([...cartItems, data]))
+                }
+
+                Swal.fire(
+                    'Sebete elave olundu!',
+                    'You clicked the button!',
+                    'success'
+                )
+            }
+
+
+        }
+
+
+    </script>
+}
