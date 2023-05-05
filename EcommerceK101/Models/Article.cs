@@ -18,5 +18,8 @@ namespace EcommerceK101.Models
         public virtual List<ArticleTag> ArticleTags{ get; set; }
         public bool IsActive { get; set; }
         public bool IsDeleted { get; set; }
+
+        public bool IsPopular { get; set; }
+        public string CoverPhoto { get; set; }
     }
 }

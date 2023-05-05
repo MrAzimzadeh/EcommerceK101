@@ -22,7 +22,7 @@ namespace EcommerceK101.Controllers
         public IActionResult Index()
         {
             var products = _context.Products.OrderByDescending(x=>x.Id).Take(3).ToList();
-            var articles = _context.Articles.Include(x=>x.User).Where(x=>x.IsActive == true && x.IsDeleted == false).ToList();
+            var articles = _context.Articles.Include(x=>x.User).Where(x=>x.IsActive == true && x.IsDeleted == false).OrderByDescending(x=>x.CreatedDate).Take(3).ToList();
             HomeVM vm = new HomeVM()
             {
                 Articles = articles,

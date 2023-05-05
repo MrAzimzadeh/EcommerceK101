@@ -5,6 +5,7 @@
 <div class="col-lg-6 m-auto">
     <form class="row g-3" method="post" enctype="multipart/form-data">
         <input type="hidden" asp-for="Products.PhotoUrl"/>
+        <input type="hidden" asp-for="Products.CoverPhoto"/>
         <div class="col-md-6">
             <label asp-for="Products.Name" class="form-label">Name</label>
             <input class="form-control" asp-for="Products.Name">
@@ -29,6 +30,13 @@
             </a>
             <input type="file" class="form-control" name="Photo"/>
         </div>
+         <div class="col-md-2">
+
+            <a href="@Model.Products.CoverPhoto" target="_blank">
+                <img src="@Model.Products.CoverPhoto" class="img-fluid w-auto"/>
+            </a>
+            <input type="file" class="form-control" name="Cover"/>
+        </div>
         <div class="col-md-4">
             <label class="form-label">Category</label>
             <select name="CategoryId" class="form-control">
@@ -48,6 +56,10 @@
         <div class="col-md-2">
             <label asp-for="Products.Quantity" class="form-label">Quantity</label>
             <input type="text" class="form-control" asp-for="Products.Quantity">
+        </div>
+        <div class="col-md-12">
+            @Html.CheckBoxFor(x=>x.Products.IsSlider)
+             <label asp-for="Products.IsSlider" class="form-label"></label>
         </div>
         <div class="col-12">
             <button type="submit" class="btn btn-primary"> Submit </button>

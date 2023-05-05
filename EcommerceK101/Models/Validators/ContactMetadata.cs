@@ -1,17 +1,20 @@
-﻿using Microsoft.AspNetCore.Mvc;
+
+using System.ComponentModel.DataAnnotations;
 
 namespace EcommerceK101.Models
 {
-    [ModelMetadataType(typeof(ContactMetadata))]
-    public class Contact
+    public class ContactMetadata
     {
-        public int Id { get; set; }
+        [Required]
         public string Name { get; set; }
+        [Required]
         public string Surname { get; set; }
+        [EmailAddress]
         public string Email { get; set; }
-        public string Phone { get; set; }
+        [Required]
+        [MinLength(5), MaxLength(20)]
         public string Subject { get; set; }
+        [MaxLength(250)]
         public string Message { get; set; }
-
     }
 }

@@ -121,6 +121,7 @@
             @foreach (var pro in Model.Products)
             {
                 <div class="col-lg-4 col-md-6 text-center card-data">
+                    <div style="display: none;" class="product-id">@pro.Id</div>
                     <div class="single-product-item">
                         <div class="product-image">
                             <a href="/Product/Detail/@pro.Id"><img class="product-photo" src="@pro.PhotoUrl"
@@ -325,32 +326,58 @@
 <!-- end latest news -->
 
 @section Scripts{
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <script>
+
         const button = document.querySelectorAll(".add-to-cart")
         const productName = document.querySelectorAll(".product-name")
         const productPrice = document.querySelectorAll(".product-price")
         const productPhoto = document.querySelectorAll(".product-photo")
+        const productId = document.querySelectorAll(".product-id")
+
         for (let i = 0; i < button.length; i++) {
             button[i].addEventListener("click", function () {
-
-                addToLs(productName[i].innerText, productPrice[i].innerText, productPhoto[i].currentSrc)
+                AddToLs(productId[i].innerText, productName[i].innerText, productPrice[i].innerText, productPhoto[i].currentSrc)
             })
         }
-       function addToLs(name, price, photoUrl) {
-            console.log(`${name} | price ${price} | photo ${photoUrl}`)
-            let data =
-            {
+
+        function AddToLs(id, name, price, photoUrl) {
+            let data = {
+                
+                id: id,
                 name: name,
                 price: price,
                 photo: photoUrl,
-                quantity: 1,
+                quatity: 1
             }
-                 var cartItems = JSON.parse(localStorage.getItem("card"))
-            if(cartItems ==   null){
+
+            console.log(id)
+
+            var cartItems = JSON.parse( localStorage.getItem("card"))
+
+            if (cartItems == null) {
                 localStorage.setItem("card", JSON.stringify([data]))
-            }else{
-                localStorage.setItem("card", JSON.stringify([...cartItems , data]))
-            }         
+            } else {
+                let result = cartItems.find(x => x.id == id)
+                if (result != undefined) {
+                    localStorage.removeItem("card", cartItems)
+                    let resQuantity = result.quatity += 1
+                    localStorage.setItem("card", JSON.stringify(cartItems))
+                } else {
+                    localStorage.setItem("card", JSON.stringify([...cartItems, data]))
+                }
+
+                Swal.fire(
+                    'Sebete elave olundu!',
+                    'You clicked the button!',
+                    'success'
+                )
+            }
+
+
         }
+
+
     </script>
 }

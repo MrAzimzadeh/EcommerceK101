@@ -42,7 +42,7 @@ namespace EcommerceK101.Areas.Dashboard.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(Article article, IFormFile Photo, List<int> tagId)
+        public async Task<IActionResult> Create(Article article, IFormFile Photo, IFormFile Cover, List<int> tagId)
         {
             var seo_url = SeoUrlHelper.SeoUrl(article.Title);
             article.SeoUrl = seo_url;
@@ -52,6 +52,8 @@ namespace EcommerceK101.Areas.Dashboard.Controllers
             {
                 var photo = ImageHelper.UploadSinglePhoto(Photo, _env);
                 article.PhotoUrl = photo;
+                var cover = ImageHelper.UploadSinglePhoto(Cover, _env);
+                article.CoverPhoto = cover;
 
                 var userId = _contextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
                 article.UserId = userId;
@@ -118,7 +120,7 @@ namespace EcommerceK101.Areas.Dashboard.Controllers
         }
 
         [HttpPost]
-        public IActionResult Update(Article article, IFormFile Photo, List<int> Tags)
+        public IActionResult Update(Article article, IFormFile Photo, IFormFile Cover, List<int> Tags)
         {
             try
             {
@@ -126,6 +128,10 @@ namespace EcommerceK101.Areas.Dashboard.Controllers
                 article.SeoUrl = SeoUrlHelper.SeoUrl(article.Title);
                 if (Photo != null)
                     article.PhotoUrl = ImageHelper.UploadSinglePhoto(Photo, _env);
+                if (Cover != null)
+                {
+                    article.CoverPhoto = ImageHelper.UploadSinglePhoto(Cover, _env);
+                }
                 var oldTags = _context.ArticleTags.Where(x => x.ArticleId == article.Id).ToList();
                 _context.ArticleTags.RemoveRange(oldTags);
                 _context.SaveChanges();
@@ -139,6 +145,17 @@ namespace EcommerceK101.Areas.Dashboard.Controllers
                     };
                     tagList.Add(articleTag);
                 }
+
+                // Todo --------  DateTime.now   ---------------
+                DateTime createdDate = _context.Articles.AsNoTracking().FirstOrDefault(x => x.Id == article.Id)?.CreatedDate ?? DateTime.MinValue;
+                if (createdDate != DateTime.MinValue)
+                {
+                    article.CreatedDate = createdDate;
+                }
+                _context.Entry(article).Property(x => x.CreatedDate).IsModified = false;
+                //  * -----------------------
+
+
                 _context.ArticleTags.AddRange(tagList);
                 _context.Articles.Update(article);
                 _context.SaveChanges();
@@ -149,10 +166,6 @@ namespace EcommerceK101.Areas.Dashboard.Controllers
                 ViewBag.ErrorMessage = e.Message;
                 return View(article);
             }
-
-
-
-            return RedirectToAction(nameof(Index));
         }
 
         public IActionResult Detail(int id)

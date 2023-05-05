@@ -1,12 +1,12 @@
 ﻿@model Article
 <div class="container-fluid m-auto">
     <h4 class="text-center m-5">Create Article </h4>
-    
+
     @if (ViewBag.ErrorMessage != null)
     {
         <div class="alert alert-warning" role="alert">
             @ViewBag.ErrorMessage
-        </div>        
+        </div>
     }
 
 
@@ -15,6 +15,7 @@
     <form class="row g-3" method="post" enctype="multipart/form-data">
         <input type="hidden" asp-for="Id" />
         <input type="hidden" asp-for="PhotoUrl" />
+        <input type="hidden" asp-for="CoverPhoto" />
         <input type="hidden" asp-for="UserId" />
 
         <div class="col-md-6">
@@ -35,6 +36,15 @@
             </a>
             <input type="file" class="form-control" name="Photo" />
         </div>
+
+        <div class="col-md-2">
+
+            <a href="@Model.CoverPhoto" target="_blank">
+                <img src="@Model.CoverPhoto" class="img-fluid w-auto" />
+            </a>
+            <input type="file" class="form-control" name="Cover" />
+        </div>
+
         <div class="form-group">
             <label for="tagId">Tags</label>
             <select id="tagId" class="form-control" name="Tags" multiple>
@@ -63,6 +73,10 @@
             <div class="form-group">
                 @Html.CheckBoxFor(x => x.IsDeleted)
                 <label asp-for="IsDeleted" class="form-label"></label>
+            </div>
+            <div class="form-group">
+                @Html.CheckBoxFor(x => x.IsPopular)
+                <label asp-for="IsPopular" class="form-label"></label>
             </div>
         </div>
         <div class="col-12">

@@ -36,11 +36,13 @@ namespace EcommerceK101.Areas.Dashboard.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Create(Product product, IFormFile Photo)
+        public IActionResult Create(Product product, IFormFile Photo, IFormFile Cover)
         {
+            var coverPhoto = ImageHelper.UploadSinglePhoto(Cover, _env);
             var photo = ImageHelper.UploadSinglePhoto(Photo, _env);
             var seo_url = SeoUrlHelper.SeoUrl(product.Name);
             product.PhotoUrl = photo;
+            product.CoverPhoto = coverPhoto;
             product.SeoUrl = seo_url;
             _context.Products.Add(product);
             _context.SaveChanges();
@@ -99,21 +101,34 @@ namespace EcommerceK101.Areas.Dashboard.Controllers
         }
 
         [HttpPost]
-        public IActionResult Update(ProductVM productVm, int id, IFormFile Photo)
+        public IActionResult Update(ProductVM productVm, int id, IFormFile Photo, IFormFile Cover , string Description)
         {
-            // VM gonderende id ile gondermeliyik yoxsa islemir 
-            var updateProduct = _context.Products.SingleOrDefault(x => x.Id == id);
-            if (Photo != null)
+            try
             {
-                updateProduct.PhotoUrl = ImageHelper.UploadSinglePhoto(Photo, _env);
+                // VM gonderende id ile gondermeliyik yoxsa islemir 
+                var updateProduct = _context.Products.SingleOrDefault(x => x.Id == id);
+                if (Photo != null)
+                {
+                    updateProduct.PhotoUrl = ImageHelper.UploadSinglePhoto(Photo, _env);
 
+                }
+                if (Cover != null)
+                {
+                    updateProduct.CoverPhoto = ImageHelper.UploadSinglePhoto(Cover, _env);
+                }
+
+                var seo_url = SeoUrlHelper.SeoUrl(productVm.Products.Name);
+                updateProduct.SeoUrl = seo_url;
+                updateProduct.Description = Description;
+                _context.Products.Update(updateProduct);
+                _context.SaveChanges();
+                return RedirectToAction(nameof(Index));
             }
-
-            var seo_url = SeoUrlHelper.SeoUrl(productVm.Products.Name);
-            updateProduct.SeoUrl = seo_url;
-            _context.Products.Update(updateProduct);
-            _context.SaveChanges();
-            return RedirectToAction(nameof(Index));
+            catch (System.Exception e)
+            {
+                System.Console.WriteLine(e.Message);
+                return RedirectToAction(nameof(Index));
+            }
         }
     }
 }

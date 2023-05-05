@@ -12,6 +12,8 @@ namespace EcommerceK101.Models
         public string Description { get; set; }
         public int Quantity { get; set; }
         public string PhotoUrl { get; set; }
+        public string CoverPhoto { get; set; }
+        public bool IsSlider { get; set; }
         public int CategoryId { get; set; }
         public Category Category { get; set; }
         

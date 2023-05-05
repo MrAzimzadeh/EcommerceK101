@@ -6,13 +6,14 @@
             <div class="col-md-4">
                 <img src="@Model.PhotoUrl" class="img-fluid rounded-start" alt="...">
             </div>
+
             <div class="col-md-8">
                 <div class="card-body">
                     <h5 class="card-title">@Model.Title</h5>
                     <p class="card-text">@Html.Raw(Model.Description)</p>
                     <p class="card-text">
-                        <small class="btn  text-body-secondary">Createa @Model.CreatedDate 
-                            <br/>
+                        <small class="btn  text-body-secondary">Createa @Model.CreatedDate
+                            <br />
                             Update : @Model.UpdatedDate
                         </small>
                     </p>
@@ -30,5 +31,8 @@
             </div>
 
         </div>
+    </div>
+    <div class="col-md-4">
+        <img src="@Model.CoverPhoto" class="img-fluid rounded-start" alt="...">
     </div>
 </div>
