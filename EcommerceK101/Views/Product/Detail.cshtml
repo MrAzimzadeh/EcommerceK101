@@ -32,9 +32,9 @@
 							<input type="number" placeholder="0">
 						</form>
 						<a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
-                        <p><strong>Categories: </strong>
-                        @Model.Product.Category.CategoryName
-                            </p>
+						<p><strong>Categories: </strong>
+							<span> <a href="/Category/CategoryList/@Model.Product.Category.Id"> @Model.Product.Category.CategoryName </a> </span>
+						</p>
 					</div>
 					<h4>Share:</h4>
 					<ul class="product-share">
@@ -56,23 +56,24 @@
 			<div class="col-lg-8 offset-lg-2 text-center">
 				<div class="section-title">
 					<h3><span class="orange-text">Related</span> Products</h3>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, fuga quas itaque eveniet beatae optio.</p>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, fuga quas itaque eveniet
+						beatae optio.</p>
 				</div>
 			</div>
 		</div>
 		<div class="row">
-			@foreach (var product in  Model.Products)
+			@foreach (var product in Model.Products)
 			{
-			    <div class="col-lg-4 col-md-6 text-center">
-                    <div class="single-product-item">
-                        <div class="product-image">
-                            <a href="/product/detail/@product.Id"><img src="@product.PhotoUrl" alt=""></a>
-                        </div>
-                        <h3>@product.Name</h3>
-                        <p class="product-price"><span>Per Kg</span> @product.Price </p>
-                        <a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
-                    </div>
-                </div>
+				<div class="col-lg-4 col-md-6 text-center">
+					<div class="single-product-item">
+						<div class="product-image">
+							<a href="/product/detail/@product.Id"><img src="@product.PhotoUrl" alt=""></a>
+						</div>
+						<h3>@product.Name</h3>
+						<p class="product-price"><span>Per Kg</span> @product.Price </p>
+						<a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+					</div>
+				</div>
 			}
 		</div>
 	</div>

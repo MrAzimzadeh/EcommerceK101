@@ -1,0 +1,36 @@
+@model IEnumerable<Product>
+<div class="hero-area hero-bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9 offset-lg-2 text-center">
+                <div class="hero-text">
+                    <div class="hero-text-tablecell">
+                        <p class="subtitle">Fresh & Organic</p>
+                        <h1>Products </h1>
+                        <div class="hero-btns">
+                            <a href="shop.html" class="boxed-btn">Fruit Collection</a>
+                            <a href="contact.html" class="bordered-btn">Contact Us</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr />
+
+<div class="row">
+    @foreach (var pro in Model)
+    {
+        <div class="col-lg-4 col-md-6 text-center card-data">
+            <div class="single-product-item">
+                <div class="product-image">
+                    <a href="/Product/Detail/@pro.Id"><img class="product-photo" src="@pro.PhotoUrl" alt="@pro.SeoUrl"></a>
+                </div>
+                <h3 class="product-name">@pro.Name</h3>
+                <p class="product-price"><span></span> @pro.Price ₼</p>
+                <a class="cart-btn add-to-cart"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+            </div>
+        </div>
+    }
+</div>
