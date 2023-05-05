@@ -1,0 +1,87 @@
+@model ShopVM
+<!-- products -->
+<div class="product-section mt-150 mb-150">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="product-filters">
+                    <ul>
+
+
+
+                        <li class="active" data-filter="*">All</li>
+                        @foreach (var item in Model.Categories)
+                        {
+                            <li data-filter=".cat_@item.Id">@item.CategoryName</li>
+                        }
+                        @* <li data-filter=".strawberry">Strawberry</li>
+                        <li data-filter=".berry">Berry</li>
+                        <li data-filter=".lemon">Lemon</li> *@
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="row product-lists">
+            @foreach (var item in Model.Products)
+            {
+            
+                <div class="col-lg-4 col-md-6 text-center cat_@item.CategoryId">
+                    <div class="single-product-item">
+                        <div class="product-image">
+                            <a href="/product/detail/@item.Id"><img src="@item.PhotoUrl" alt=""></a>
+                        </div>
+                        <h3>@item.Name</h3>
+                        <p class="product-price"><span>Per item </span> @item.Price$ </p>
+                        <a href="#" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+                    </div>
+                </div>
+            }
+
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="pagination-wrap">
+                    <ul>
+                        <li><a href="#">Prev</a></li>
+                        <li><a href="#">1</a></li>
+                        <li><a class="active" href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">Next</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end products -->
+
+<!-- logo carousel -->
+<div class="logo-carousel-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="logo-carousel-inner">
+                    <div class="single-logo-item">
+                        <img src="assets/img/company-logos/1.png" alt="">
+                    </div>
+                    <div class="single-logo-item">
+                        <img src="assets/img/company-logos/2.png" alt="">
+                    </div>
+                    <div class="single-logo-item">
+                        <img src="assets/img/company-logos/3.png" alt="">
+                    </div>
+                    <div class="single-logo-item">
+                        <img src="assets/img/company-logos/4.png" alt="">
+                    </div>
+                    <div class="single-logo-item">
+                        <img src="assets/img/company-logos/5.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end logo carousel -->
