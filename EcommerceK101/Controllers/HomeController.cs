@@ -7,13 +7,13 @@ using WebApp.Data;
 
 namespace EcommerceK101.Controllers
 {
-    
+
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
         private readonly AppDbContext _context;
 
-        public HomeController(ILogger<HomeController> logger , AppDbContext context)
+        public HomeController(ILogger<HomeController> logger, AppDbContext context)
         {
             _logger = logger;
             _context = context;
@@ -21,13 +21,14 @@ namespace EcommerceK101.Controllers
 
         public IActionResult Index()
         {
-            var products = _context.Products.OrderByDescending(x=>x.Id).Take(3).ToList();
-            var articles = _context.Articles.Include(x=>x.User).Where(x=>x.IsActive == true && x.IsDeleted == false).OrderByDescending(x=>x.CreatedDate).Take(3).ToList();
-           
+            var products = _context.Products.OrderByDescending(x => x.Id).Take(3).ToList();
+            var articles = _context.Articles.Include(x => x.User).Where(x => x.IsActive == true && x.IsDeleted == false).OrderByDescending(x => x.CreatedDate).Take(3).ToList();
+            var slider = _context.Articles.Where(x => x.IsActive == true && x.IsDeleted == false && x.IsPopular == true).OrderByDescending(x => x.Id).Take(3).ToList();
             HomeVM vm = new HomeVM()
             {
                 Articles = articles,
                 Products = products,
+                Slider = slider
 
             };
             return View(vm);
@@ -38,11 +39,11 @@ namespace EcommerceK101.Controllers
             return View();
         }
 
-         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
-    {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-    }
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
 
     }
 }
