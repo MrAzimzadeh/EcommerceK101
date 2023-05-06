@@ -20,6 +20,12 @@ namespace WebApp.Data
         public DbSet<ArticleTag> ArticleTags { get; set; }
 
 
+
+        public DbSet<Team> Teams { get; set; }
+
+        public DbSet<SocialNetwork> SocialNetworks{ get; set; }
+        public DbSet<TeamsNetwork> TeamsNetworks { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

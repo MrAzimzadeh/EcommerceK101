@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApp.Data;
 
@@ -11,9 +12,11 @@ using WebApp.Data;
 namespace EcommerceK101.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230505111111_SocialTeam")]
+    partial class SocialTeam
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -186,25 +189,6 @@ namespace EcommerceK101.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("EcommerceK101.Models.SocialNetwork", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Icon")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Url")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("SocialNetworks");
-                });
-
             modelBuilder.Entity("EcommerceK101.Models.Tag", b =>
                 {
                     b.Property<int>("Id")
@@ -219,54 +203,6 @@ namespace EcommerceK101.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Tags");
-                });
-
-            modelBuilder.Entity("EcommerceK101.Models.Team", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhotoUrl")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Position")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Teams");
-                });
-
-            modelBuilder.Entity("EcommerceK101.Models.TeamsNetwork", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("SocialNetworkId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TeamId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserUrl")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("SocialNetworkId");
-
-                    b.HasIndex("TeamId");
-
-                    b.ToTable("TeamsNetworks");
                 });
 
             modelBuilder.Entity("EcommerceK101.Models.User", b =>
@@ -519,25 +455,6 @@ namespace EcommerceK101.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("EcommerceK101.Models.TeamsNetwork", b =>
-                {
-                    b.HasOne("EcommerceK101.Models.SocialNetwork", "SocialNetwork")
-                        .WithMany()
-                        .HasForeignKey("SocialNetworkId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("EcommerceK101.Models.Team", "Team")
-                        .WithMany("TeamsNetworks")
-                        .HasForeignKey("TeamId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("SocialNetwork");
-
-                    b.Navigation("Team");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -597,11 +514,6 @@ namespace EcommerceK101.Migrations
             modelBuilder.Entity("EcommerceK101.Models.Tag", b =>
                 {
                     b.Navigation("ArticleTags");
-                });
-
-            modelBuilder.Entity("EcommerceK101.Models.Team", b =>
-                {
-                    b.Navigation("TeamsNetworks");
                 });
 #pragma warning restore 612, 618
         }

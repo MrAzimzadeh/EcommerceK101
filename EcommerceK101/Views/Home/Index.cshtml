@@ -124,7 +124,7 @@
                     <div style="display: none;" class="product-id">@pro.Id</div>
                     <div class="single-product-item">
                         <div class="product-image">
-                            <a href="/Product/Detail/@pro.Id"><img class="product-photo" src="@pro.PhotoUrl"
+                            <a href="/Product/Detail/@pro.Id"><img w src="@pro.PhotoUrl"
                                     alt="@pro.SeoUrl"></a>
                         </div>
                         <h3 class="product-name">@pro.Name</h3>
@@ -349,7 +349,7 @@
                 name: name,
                 price: price,
                 photo: photoUrl,
-                quatity: 1
+                quantity: 1
             }
 
             console.log(id)
@@ -362,7 +362,7 @@
                 let result = cartItems.find(x => x.id == id)
                 if (result != undefined) {
                     localStorage.removeItem("card", cartItems)
-                    let resQuantity = result.quatity += 1
+                    let resQuantity = result.quantity += 1
                     localStorage.setItem("card", JSON.stringify(cartItems))
                 } else {
                     localStorage.setItem("card", JSON.stringify([...cartItems, data]))

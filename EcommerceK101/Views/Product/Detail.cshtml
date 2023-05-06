@@ -1,81 +1,195 @@
 ﻿@model ProductDetailVM
 <!-- breadcrumb-section -->
 <div class="breadcrumb-section breadcrumb-bg" style="background-image: url(@Model.Product.PhotoUrl);">
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-8 offset-lg-2 text-center">
-				<div class="breadcrumb-text">
-					<p>See more Details</p>
-					<h1>Single Product</h1>
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2 text-center">
+                <div class="breadcrumb-text">
+                    <p>See more Details</p>
+                    <h1>Single Product</h1>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <!-- end breadcrumb section -->
 <!-- single product -->
 <div class="single-product mt-150 mb-150">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-5">
-				<div class="single-product-img">
-					<img src="@Model.Product.PhotoUrl" alt="">
-				</div>
-			</div>
-			<div class="col-md-7">
-				<div class="single-product-content">
-					<h3>@Model.Product.Name</h3>
-					<p class="single-product-pricing"><span>Per item</span> @Model.Product.Price</p>
-					<p>@Html.Raw(Model.Product.Description)</p>
-					<div class="single-product-form">
-						<form action="index.html">
-							<input type="number" placeholder="0">
-						</form>
-						<a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
-						<p><strong>Categories: </strong>
-							<span> <a href="/Category/CategoryList/@Model.Product.Category.Id"> @Model.Product.Category.CategoryName </a> </span>
-						</p>
-					</div>
-					<h4>Share:</h4>
-					<ul class="product-share">
-						<li><a href=""><i class="fab fa-facebook-f"></i></a></li>
-						<li><a href=""><i class="fab fa-twitter"></i></a></li>
-						<li><a href=""><i class="fab fa-google-plus-g"></i></a></li>
-						<li><a href=""><i class="fab fa-linkedin"></i></a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5">
+                <div class="single-product-img">
+                    <img class="product-photo" src="@Model.Product.PhotoUrl" alt="">
+                </div>
+            </div>
+            <div class="col-md-7">
+                <div class="single-product-content">
+                    <div style="display: none;" class="product-id">@Model.Product.Id</div>
+                    <h3 class="product-name">@Model.Product.Name</h3>
+                    <p class="single-product-pricing product-price"><span>Per item</span> @Model.Product.Price</p>
+                    <p>@Html.Raw(Model.Product.Description)</p>
+                    <div class="single-product-form">
+                        <form action="#">
+                            <input class="product-quantity" type="number" min="1" max="10" value="1" name="1"
+                                placeholder="0">
+                        </form>
+                        <a class="cart-btn add-to-cart"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+                        <p><strong>Categories: </strong>
+                            <span> <a href="/Category/CategoryList/@Model.Product.Category.Id">
+                                    @Model.Product.Category.CategoryName </a> </span>
+                        </p>
+                    </div>
+                    <h4>Share:</h4>
+                    <ul class="product-share">
+                        <li><a href=""><i class="fab fa-facebook-f"></i></a></li>
+                        <li><a href=""><i class="fab fa-twitter"></i></a></li>
+                        <li><a href=""><i class="fab fa-google-plus-g"></i></a></li>
+                        <li><a href=""><i class="fab fa-linkedin"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <!-- end single product -->
 <!-- more products -->
 <div class="more-products mb-150">
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-8 offset-lg-2 text-center">
-				<div class="section-title">
-					<h3><span class="orange-text">Related</span> Products</h3>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, fuga quas itaque eveniet
-						beatae optio.</p>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			@foreach (var product in Model.Products)
-			{
-				<div class="col-lg-4 col-md-6 text-center">
-					<div class="single-product-item">
-						<div class="product-image">
-							<a href="/product/detail/@product.Id"><img src="@product.PhotoUrl" alt=""></a>
-						</div>
-						<h3>@product.Name</h3>
-						<p class="product-price"><span>Per Kg</span> @product.Price </p>
-						<a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
-					</div>
-				</div>
-			}
-		</div>
-	</div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2 text-center">
+                <div class="section-title">
+                    <h3><span class="orange-text">Related</span> Products</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, fuga quas itaque eveniet
+                        beatae optio.</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            @foreach (var product in Model.Products)
+            {
+                <div class="col-lg-4 col-md-6 text-center">
+                    <div style="display: none;" class="product-id-list">@product.Id</div>
+                    <div class="single-product-item">
+                        <div class="product-image">
+                            <a href="/product/detail/@product.Id">
+                                <img src="@product.PhotoUrl" class="product-photo-list" alt="">
+                            </a>
+                        </div>
+                        <h3 class="product-name-list">@product.Name</h3>
+                        <p class="product-price product-price-list">
+                            @product.Price
+                        </p>
+                        <a href="#" class="cart-btn add-to-cart-list">
+                            <i class="fas fa-shopping-cart"></i>
+                            Add to Cart
+                        </a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
 </div>
 <!-- end more products -->
+
+@section Scripts{
+    @* /// <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> *@
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    @*todo listler ucun olan hisse *@
+    <script>
+        const button = document.querySelectorAll(".add-to-cart-list")
+        const productName = document.querySelectorAll(".product-name-list")
+        const productPrice = document.querySelectorAll(".product-price-list")
+        const productPhoto = document.querySelectorAll(".product-photo-list")
+        const productId = document.querySelectorAll(".product-id-list")
+
+
+        for (let i = 0; i < button.length; i++) {
+            button[i].addEventListener("click", function () {
+                AddToLs(productId[i].innerText, productName[i].innerText, productPrice[i].innerText,
+                    productPhoto[i].currentSrc)
+            })
+        }
+
+        function AddToLs(id, name, price, photoUrl) {
+
+            let data = {
+
+                id: id,
+                name: name,
+                price: price,
+                photo: photoUrl,
+                quantity: 1
+            }
+
+            console.log(id)
+
+            var cartItems = JSON.parse(localStorage.getItem("card"))
+
+            if (cartItems == null) {
+                localStorage.setItem("card", JSON.stringify([data]))
+            } else {
+                let result = cartItems.find(x => x.id == id)
+                if (result != undefined) {
+                    localStorage.removeItem("card", cartItems)
+                    let resQuantity = result.quantity += 1
+                    localStorage.setItem("card", JSON.stringify(cartItems))
+                } else {
+                    localStorage.setItem("card", JSON.stringify([...cartItems, data]))
+                }
+
+                Swal.fire(
+                    'Sebete elave olundu!',
+                    'You clicked the button!',
+                    'success'
+                )
+            }
+
+
+        }
+    </script>
+
+    @* todo Tek olan hisse *@
+
+    <script>
+
+        const addToCartButtons = document.querySelectorAll(".add-to-cart");
+
+        addToCartButtons.forEach(button => {
+            button.addEventListener("click", function () {
+                const productContainer = button.closest(".single-product-content");
+                const productId = productContainer.querySelector(".product-id").innerText;
+                const productName = productContainer.querySelector(".product-name").innerText;
+                const productPrice = productContainer.querySelector(".product-price").innerText;
+                const productQuantity = productContainer.querySelector(".product-quantity").value;
+                //
+        @* const productPhotoElement = productContainer.querySelector(".product-photo"); *@
+                const productPhoto = "@Model.Product.PhotoUrl"
+                const productData = {
+                    id: productId,
+                    name: productName,
+                    price: productPrice,
+                    photo: productPhoto,
+                    quantity: productQuantity
+                };
+
+                let cartItems = JSON.parse(localStorage.getItem("card")) || [];
+                let existingProductIndex = cartItems.findIndex(item => item.id === productData.id);
+
+                if (existingProductIndex !== -1) {
+                    cartItems[existingProductIndex].quantity = parseInt(cartItems[existingProductIndex].quantity) + parseInt(productData.quantity);
+                } else {
+                    cartItems.push(productData);
+                }
+
+                localStorage.setItem("card", JSON.stringify(cartItems));
+
+                Swal.fire(
+                    'Sebete elave olundu!',
+                    'You clicked the button!',
+                    'success'
+                );
+            });
+        });
+    </script>
+
+}
