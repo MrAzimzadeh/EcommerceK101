@@ -113,12 +113,11 @@
         function AddToLs(id, name, price, photoUrl) {
 
             let data = {
-
                 id: id,
                 name: name,
                 price: price,
                 photo: photoUrl,
-                quantity: 1
+                quatity: 1
             }
 
             console.log(id)
@@ -131,7 +130,7 @@
                 let result = cartItems.find(x => x.id == id)
                 if (result != undefined) {
                     localStorage.removeItem("card", cartItems)
-                    let resQuantity = result.quantity += 1
+                    let resQuantity = result.quatity += 1
                     localStorage.setItem("card", JSON.stringify(cartItems))
                 } else {
                     localStorage.setItem("card", JSON.stringify([...cartItems, data]))
@@ -163,20 +162,20 @@
                 const productQuantity = productContainer.querySelector(".product-quantity").value;
                 //
         @* const productPhotoElement = productContainer.querySelector(".product-photo"); *@
-                const productPhoto = "@Model.Product.PhotoUrl"
+                    const productPhoto = "@Model.Product.PhotoUrl"
                 const productData = {
                     id: productId,
                     name: productName,
                     price: productPrice,
                     photo: productPhoto,
-                    quantity: productQuantity
+                    quatity: productQuantity
                 };
 
                 let cartItems = JSON.parse(localStorage.getItem("card")) || [];
                 let existingProductIndex = cartItems.findIndex(item => item.id === productData.id);
 
                 if (existingProductIndex !== -1) {
-                    cartItems[existingProductIndex].quantity = parseInt(cartItems[existingProductIndex].quantity) + parseInt(productData.quantity);
+                    cartItems[existingProductIndex].quatity = parseInt(cartItems[existingProductIndex].quatity) + parseInt(productData.quatity);
                 } else {
                     cartItems.push(productData);
                 }

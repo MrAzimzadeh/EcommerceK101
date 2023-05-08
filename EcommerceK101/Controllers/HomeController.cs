@@ -28,7 +28,7 @@ namespace EcommerceK101.Controllers
             {
                 Articles = articles,
                 Products = products,
-                Slider = slider
+                Slider = slider 
 
             };
             return View(vm);
