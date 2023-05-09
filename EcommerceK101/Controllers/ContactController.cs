@@ -34,12 +34,9 @@ namespace EcommerceK101.Controllers
                 {
                     return View(contact);
                 }
-
                 _context.Contacts.Add(contact);
                 _context.SaveChanges();
                 return RedirectToAction("Index", "Home");
-
-
             }
             catch (System.Exception)
             {

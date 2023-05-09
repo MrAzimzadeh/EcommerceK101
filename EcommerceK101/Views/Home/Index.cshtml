@@ -2,63 +2,51 @@
 
 <!-- home page slider -->
 <div class="homepage-slider">
-    <!-- single home slider -->
-    <div class="single-homepage-slider homepage-bg-1">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12 col-lg-7 offset-lg-1 offset-xl-0">
-                    <div class="hero-text">
-                        <div class="hero-text-tablecell">
-                            <p class="subtitle">Fresh & Organic</p>
-                            <h1>Delicious Seasonal Fruits</h1>
-                            <div class="hero-btns">
-                                <a href="shop.html" class="boxed-btn">Fruit Collection</a>
-                                <a href="contact.html" class="bordered-btn">Contact Us</a>
+    @{
+        int counter = 0;
+    }
+    @foreach (var item in Model.Slider)
+    {
+        string clasName = "";
+        if (counter == 1)
+        {
+            clasName = "text-right";
+        }
+        else if (counter == 2)
+        {
+            clasName = "text-center";
+        }
+        else
+        {
+            clasName = "offset-xl-0";
+        }
+        <div class="single-homepage-slider homepage-bg-3">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-10 offset-lg-1 @clasName">
+                        <div class="hero-text">
+                            <div class="hero-text-tablecell">
+                                <p class="subtitle">@item.CreatedDate.ToString("MM dd yyyy")</p>
+                                <h1>@item.Title</h1>
+                                <div class="hero-btns">
+                                    <a href="/article/detail/@item.Id" class="boxed-btn">Visit Shop</a>
+                                    <a href="/Contact/" class="bordered-btn">Contact Us</a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- single home slider -->
-    <div class="single-homepage-slider homepage-bg-2">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-10 offset-lg-1 text-center">
-                    <div class="hero-text">
-                        <div class="hero-text-tablecell">
-                            <p class="subtitle">Fresh Everyday</p>
-                            <h1>100% Organic Collection</h1>
-                            <div class="hero-btns">
-                                <a href="shop.html" class="boxed-btn">Visit Shop</a>
-                                <a href="contact.html" class="bordered-btn">Contact Us</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- single home slider -->
-    <div class="single-homepage-slider homepage-bg-3">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-10 offset-lg-1 text-right">
-                    <div class="hero-text">
-                        <div class="hero-text-tablecell">
-                            <p class="subtitle">Mega Sale Going On!</p>
-                            <h1>Get December Discount</h1>
-                            <div class="hero-btns">
-                                <a href="shop.html" class="boxed-btn">Visit Shop</a>
-                                <a href="contact.html" class="bordered-btn">Contact Us</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+        @if (counter <= 2)
+        {
+            counter++;
+        }
+        else
+        {
+            counter = 0;
+        }
+    }
 </div>
 <!-- end home page slider -->
 <!-- features list section -->
@@ -111,8 +99,10 @@
             <div class="col-lg-8 offset-lg-2 text-center">
                 <div class="section-title">
                     <h3><span class="orange-text">Our</span> Products</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, fuga quas itaque eveniet
-                        beatae optio.</p>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, fuga quas itaque eveniet
+                        beatae optio.
+                    </p>
                 </div>
             </div>
         </div>
@@ -124,7 +114,10 @@
                     <div style="display: none;" class="product-id">@pro.Id</div>
                     <div class="single-product-item">
                         <div class="">
-                            <a href="/Product/Detail/@pro.Id"><img class="product-image"  src="@pro.PhotoUrl" alt="@pro.SeoUrl"></a>
+                            <a href="/Product/Detail/@pro.Id">
+                                <img class="product-image" src="@pro.PhotoUrl"
+                                     alt="@pro.SeoUrl">
+                            </a>
                         </div>
                         <h3 class="product-name">@pro.Name</h3>
                         <p class="product-price"><span></span> @pro.Price ₼</p>
@@ -157,9 +150,11 @@
             <div class="content-column col-lg-6">
                 <h3><span class="orange-text">Deal</span> of the month</h3>
                 <h4>Hikan Strwaberry</h4>
-                <div class="text">Quisquam minus maiores repudiandae nobis, minima saepe id, fugit ullam similique!
+                <div class="text">
+                    Quisquam minus maiores repudiandae nobis, minima saepe id, fugit ullam similique!
                     Beatae, minima quisquam molestias facere ea. Perspiciatis unde omnis iste natus error sit voluptatem
-                    accusant</div>
+                    accusant
+                </div>
                 <!--Countdown Timer-->
                 <div class="time-counter">
                     <div class="time-countdown clearfix" data-countdown="2020/2/01">
@@ -249,19 +244,24 @@
         <div class="row">
             <div class="col-lg-6 col-md-12">
                 <div class="abt-bg">
-                    <a href="https://www.youtube.com/watch?v=DBLlFWYcIGQ" class="video-play-btn popup-youtube"><i
-                            class="fas fa-play"></i></a>
+                    <a href="https://www.youtube.com/watch?v=DBLlFWYcIGQ" class="video-play-btn popup-youtube">
+                        <i class="fas fa-play"></i>
+                    </a>
                 </div>
             </div>
             <div class="col-lg-6 col-md-12">
                 <div class="abt-text">
                     <p class="top-sub">Since Year 1999</p>
                     <h2>We are <span class="orange-text">Fruitkha</span></h2>
-                    <p>Etiam vulputate ut augue vel sodales. In sollicitudin neque et massa porttitor vestibulum ac vel
+                    <p>
+                        Etiam vulputate ut augue vel sodales. In sollicitudin neque et massa porttitor vestibulum ac vel
                         nisi. Vestibulum placerat eget dolor sit amet posuere. In ut dolor aliquet, aliquet sapien sed,
-                        interdum velit. Nam eu molestie lorem.</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente facilis illo repellat
-                        veritatis minus, et labore minima mollitia qui ducimus.</p>
+                        interdum velit. Nam eu molestie lorem.
+                    </p>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente facilis illo repellat
+                        veritatis minus, et labore minima mollitia qui ducimus.
+                    </p>
                     <a href="about.html" class="boxed-btn mt-4">know more</a>
                 </div>
             </div>
@@ -286,8 +286,10 @@
             <div class="col-lg-8 offset-lg-2 text-center">
                 <div class="section-title">
                     <h3><span class="orange-text">Our</span> News</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, fuga quas itaque eveniet
-                        beatae optio.</p>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, fuga quas itaque eveniet
+                        beatae optio.
+                    </p>
                 </div>
             </div>
         </div>
@@ -304,12 +306,15 @@
                             <h3><a href="/Article/detail/@art.Id">@art.Title</a></h3>
                             <p class="blog-meta">
                                 <span class="author"><i class="fas fa-user"></i> @art.User.Name</span>
-                                <span class="date"><i class="fas fa-calendar"></i>
-                                    @art.CreatedDate.ToString("MM/dd/yyyy")</span>
+                                <span class="date">
+                                    <i class="fas fa-calendar"></i>
+                                    @art.CreatedDate.ToString("MM/dd/yyyy")
+                                </span>
                             </p>
                             <p class="excerpt">@Html.Raw(art.Description)</p>
-                            <a href="single-news.html" class="read-more-btn">read more <i
-                                    class="fas fa-angle-right"></i></a>
+                            <a href="single-news.html" class="read-more-btn">
+                                read more <i class="fas fa-angle-right"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -323,7 +328,6 @@
     </div>
 </div>
 <!-- end latest news -->
-
 @section Scripts{
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 

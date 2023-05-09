@@ -113,11 +113,8 @@
                 photo: photoUrl,
                 quatity: 1
             }
-
             console.log(id)
-
             var cartItems = JSON.parse(localStorage.getItem("card"))
-
             if (cartItems == null) {
                 localStorage.setItem("card", JSON.stringify([data]))
             } else {
@@ -129,17 +126,12 @@
                 } else {
                     localStorage.setItem("card", JSON.stringify([...cartItems, data]))
                 }
-
                 Swal.fire(
                     'Sebete elave olundu!',
                     'You clicked the button!',
                     'success'
                 )
             }
-
-
         }
-
-
     </script>
 }
