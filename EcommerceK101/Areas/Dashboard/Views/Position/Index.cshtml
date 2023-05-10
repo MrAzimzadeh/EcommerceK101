@@ -1,10 +1,10 @@
-﻿@model IEnumerable<SocialNetwork>
+﻿@model IEnumerable<Position>
 <div class="container-fluid">
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">
-                <a href="/dashboard/Social/create">Create</a>
+                <a href="/dashboard/Position/create">Create</a>
             </h6>
         </div>
         <div class="card-body">
@@ -13,8 +13,8 @@
                     <thead>
                         <tr>
                             <th>#Id</th>
-                            <th>Icon</th>
-                            <th> Url </th>
+                            <th>Name</th>
+                            <th> Count </th>
                             <th>
                                 Parametr
                             </th>
@@ -23,8 +23,8 @@
                     <tfoot>
                         <tr>
                             <th>#Id</th>
-                            <th>Icon</th>
-                            <th>Url</th>
+                            <th>Name</th>
+                            <th>Count</th>
                             <th>
                                 Parametr
                             </th>
@@ -32,25 +32,25 @@
                     </tfoot>
                     <tbody>
                         @* *@
-                        @foreach (var social in Model)
+                        @foreach (var position  in Model)
                         {
                             <tr>
-                                <th>@social.Id</th>
+                                <th>@position.Id</th>
                                 <th>
-                                    <i class="@social.Icon"></i>
+                                    @position.PositionName
                                 </th>
                                 <th>
-                                    @social.BaseUrl
+                                    
                                 </th>
-                                
+
                                 <th class="d-flex">
-                                    <a href="/dashboard/Social/Detail/@social.Id" class="btn btn-secondary">
+                                    <a href="/dashboard/position/Detail/@position.Id" class="btn btn-secondary">
                                         Deteil
                                     </a>
-                                    <a href="/dashboard/Social/Delete/@social.Id" class="btn btn-danger w-50">
+                                    <a href="/dashboard/position/Delete/@position.Id" class="btn btn-danger w-50">
                                         Delete
                                     </a>
-                                    <a href="/dashboard/Social/Edit/@social.Id" class="btn btn-primary w-50">Update</a>
+                                    <a href="/dashboard/position/Edit/@position.Id" class="btn btn-primary w-50">Update</a>
                                 </th>
                             </tr>
                         }

@@ -1,0 +1,25 @@
+﻿@model Position
+
+@if (@ViewBag.Error != null)
+{
+    <div class="col-lg-6 m-auto mb-5">
+        <div class="alert alert-danger shadow" role="alert">
+            @ViewBag.Error
+        </div>
+    </div>
+}
+<div class="col-lg-6 m-auto">
+    <div class="card shadow p-3 mb-4">
+        <form method="post" asp-controller="Position" asp-action="Edit">
+            <div class="form-group">
+                <input asp-for="Id" type="hidden"/>
+                <label asp-for="PositionName">Icon</label>
+                <input id="Icon" class="form-control" type="text" asp-for="PositionName" />
+            </div>
+            <div class="form-group">
+                <input class="btn btn-outline-success btn-sm" type="submit" value="Submit" />
+                <a href="/dashboard/Position/index/" class="btn btn-outline-warning btn-sm">Geri</a>
+            </div>
+        </form>
+    </div>
+</div>

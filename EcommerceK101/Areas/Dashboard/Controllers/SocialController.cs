@@ -4,6 +4,7 @@ using WebApp.Data;
 
 namespace EcommerceK101.Areas.Dashboard.Controllers
 {
+    [Area(nameof(Dashboard))]
     public class SocialController : Controller
     {
         private readonly AppDbContext _context;
@@ -19,11 +20,13 @@ namespace EcommerceK101.Areas.Dashboard.Controllers
             return View(social);
         }
 
+        [HttpGet]
         public IActionResult Details(int id)
         {
             return View();
         }
 
+        [HttpGet]
         public IActionResult Delete(int id)
         {
             var check = _context.SocialNetworks.FirstOrDefault(x => x.Id == id);
@@ -51,15 +54,26 @@ namespace EcommerceK101.Areas.Dashboard.Controllers
                 {
                     return View(socialNetwork);
                 }
+                var socialIconChek = _context.SocialNetworks.FirstOrDefault(x => x.Icon == socialNetwork.Icon);
+                var SocialUrlCheck = _context.SocialNetworks.FirstOrDefault(x => x.BaseUrl == socialNetwork.BaseUrl);
 
+                if (socialIconChek != null)
+                {
+                    ViewBag.Icon = "Icon var!";
+                    return View();
+                }
+                else if (SocialUrlCheck != null)
+                {
+                    ViewBag.Url = "url var!";
+                    return View();
+                }
                 _context.SocialNetworks.Add(socialNetwork);
                 _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
-
             }
             catch (Exception e)
             {
-                ViewBag.Error = "aLINMADAI ";
+                ViewBag.Error = "Error";
                 return View(socialNetwork);
             }
 
