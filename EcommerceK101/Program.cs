@@ -14,14 +14,14 @@ builder.Services.AddDbContext<AppDbContext>(option => option.UseSqlServer(connec
 
 builder.Services.AddDefaultIdentity<User>().AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<AppDbContext>();
-    
+
 builder.Services.ConfigureApplicationCookie(options =>
 {
     options.LoginPath = "/Auth/Login/";
 });
 var app = builder.Build();
 
-app.UseExceptionHandler("/Home/Error");
+// app.UseExceptionHandler("/Home/Error");
 // Configure the HTTP request pipeline.
 
 if (!app.Environment.IsDevelopment())
@@ -40,10 +40,12 @@ app.UseAuthorization();
 
 app.UseEndpoints(endpoints =>
 {
+
     endpoints.MapControllerRoute(
         name: "areas",
         pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}/{SeoUrl?}"
     );
+
 });
 
 app.MapControllerRoute(

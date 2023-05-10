@@ -18,13 +18,11 @@ namespace WebApp.Data
 
         public DbSet<Tag> Tags { get; set; }
         public DbSet<ArticleTag> ArticleTags { get; set; }
-
-
-
         public DbSet<Team> Teams { get; set; }
-
         public DbSet<SocialNetwork> SocialNetworks{ get; set; }
         public DbSet<TeamsNetwork> TeamsNetworks { get; set; }
+        public DbSet<Position> Positions { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
