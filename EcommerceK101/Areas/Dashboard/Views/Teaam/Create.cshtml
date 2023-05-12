@@ -1,0 +1,27 @@
+﻿@model Team
+
+<div class="col-lg-6 m-auto">
+    <div class="card shadow p-3 mb-4">
+        <form method="post" asp-controller="Teaam" asp-action="Create">
+            <div class="form-group">
+                <label asp-for="Name">Icon</label>
+                <input id="Icon" class="form-control" type="text" asp-for="Name" />
+            </div>
+            <div class="col-md-2">
+                <input type="file" class="form-control" name="Photo" />
+            </div>
+
+            <div class="col-md-2">
+                @foreach (var item in ViewData["socials"] as List<SocialNetwork>)
+                {
+                    <div class="d-flex">
+                        <span>@item.BaseUrl</span> <input name  class="form-control" />
+                    </div>
+                }
+            </div>
+            <div class="form-group">
+                <input class="btn btn-outline-success btn-sm" type="submit" value="Submit" />
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,43 @@
+@model SocialNetwork
+<div class="col-lg-6 m-auto mb-5">
+    <div class="alert alert-primary shadow" role="alert">
+        <i class="@ViewBag.iconShow"></i> 
+    </div>
+</div>
+@if (@ViewBag.Url != null || ViewBag.Icon != null)
+{
+    <div class="col-lg-6 m-auto mb-5">
+        @if (@ViewBag.Url != null)
+        {
+            <div class="alert alert-danger shadow" role="alert">
+                @ViewBag.Url
+            </div>
+        }
+        @if (ViewBag.Icon != null)
+        {
+            <div class="alert alert-danger shadow" role="alert">
+                @ViewBag.Icon
+            </div>
+        }
+    </div>
+}
+<div class="col-lg-6 m-auto">
+    <div class="card shadow p-3 mb-4">
+
+        <form method="post" asp-controller="Social" asp-action="Edit">
+            <input asp-for="Id" type="hidden">
+            <div class="form-group">
+                <label asp-for="Icon">Icon</label>
+                <input id="Icon" class="form-control" type="text" asp-for="Icon" />
+            </div>
+            <div class="form-group">
+                <label asp-for="BaseUrl">Url</label>
+                <input id="BaseUrl" class="form-control" type="text" asp-for="BaseUrl" />
+            </div>
+            <div class="form-group">
+                <input class="btn btn-outline-success btn-sm" type="submit" value="Submit" />
+                <a href="/dashboard/social/" class="btn btn-outline-info">Geri</a>
+            </div>
+        </form>
+    </div>
+</div>

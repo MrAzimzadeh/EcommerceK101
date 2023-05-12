@@ -43,6 +43,7 @@ namespace EcommerceK101.Areas.Dashboard.Controllers
 
         public IActionResult Create()
         {
+
             return View();
         }
         [HttpPost]
@@ -78,6 +79,47 @@ namespace EcommerceK101.Areas.Dashboard.Controllers
             }
 
         }
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+
+            if (id == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            var check = _context.SocialNetworks.FirstOrDefault(x => x.Id == id);
+            ViewBag.iconShow = check.Icon;
+            return View(check);
+        }
+        [HttpPost]
+        public IActionResult Edit(SocialNetwork socialNetwork)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(socialNetwork);
+            }
+
+            var socialIconChek = _context.SocialNetworks.FirstOrDefault(x => x.Icon == socialNetwork.Icon);
+            var SocialUrlCheck = _context.SocialNetworks.FirstOrDefault(x => x.BaseUrl == socialNetwork.BaseUrl);
+            ViewBag.iconShow = socialNetwork.Icon;
+            if (socialIconChek != null)
+            {
+                ViewBag.Icon = "Icon var!";
+                return View();
+            }
+            else if (SocialUrlCheck != null)
+            {
+                ViewBag.Url = "url var!";
+                return View();
+            }
+            _context.SocialNetworks.Update(socialNetwork);
+            _context.SaveChanges();
+            return RedirectToAction(nameof(Index));
+        }
+
+
+
 
     }
 }

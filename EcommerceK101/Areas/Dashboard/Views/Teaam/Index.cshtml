@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Team>
+
+<div class="container-fluid">
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">
+                <a href="/dashboard/Team/create">Create</a>
+            </h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>#Id</th>
+                            <th>Title</th>
+                            <th>Count </th>
+                            <th>
+                                Parametr
+                            </th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>#Id</th>
+                            <th>Title</th>
+                            <th>Count</th>
+                            <th>
+                                Parametr
+                            </th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @* *@
+                        @foreach (var tag in Model)
+                        {
+                            <tr>
+                                <th>@tag.Id</th>
+                                <th>
+                                    @tag.Name
+                                </th>
+                                <th>
+                                    @* @(article. ? "Active" : "De Aktive"); *@
+                                </th>
+                                <th class="d-flex">
+                                    @*  <a href="/dashboard/Tag/Detail/@tag.Id" class="btn btn-secondary">
+                                Deteil
+                                </a>*@
+                                    <a href="/dashboard/Tag/Delete/@tag.Id" class="btn btn-danger w-50">
+                                        Delete
+                                    </a>
+                                    <a href="/dashboard/Tag/Edit/@tag.Id" class="btn btn-primary w-50">Update</a>
+                                </th>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
