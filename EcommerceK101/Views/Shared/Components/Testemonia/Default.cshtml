@@ -1,0 +1,138 @@
+﻿@model List<Contact>
+@{
+    var count = Model.Where(x => x.IsPopular == true).ToList();
+}
+@*<div class="container">
+    <div class="row">
+        <div class="col-lg-10 offset-lg-1 text-center">
+            <div class="testimonial-sliders">
+                @foreach (var contact in Model)
+                {
+                    <div class="single-testimonial-slider">
+                        <div class="client-avater">
+                            <img src="assets/img/avaters/avatar1.png" alt="">
+                        </div>
+                        <div class="client-meta">
+                            <h3> @contact.Name || @contact.Surname <span>@contact.Subject
+                            </span></h3>
+                            <p class="testimonial-body">
+                               @contact.Message
+                            </p>
+                            <div class="last-icon">
+                                <i class="fas fa-quote-right"></i>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>*@
+
+
+@*<div class="single-testimonial-slider">
+    <div class="client-avater">
+        <img src="assets/img/avaters/avatar1.png" alt="">
+    </div>
+    <div class="client-meta">
+        <h3>Saira saasasasas <span>Local shop owner</span></h3>
+        <p class="testimonial-body">
+            " Sed ut perspiciatis unde omnis iste natus error veritatis et quasi architecto beatae
+            vitae dict eaque ipsa quae ab illo inventore Sed ut perspiciatis unde omnis iste natus
+            error sit voluptatem accusantium "
+        </p>
+        <div class="last-icon">
+            <i class="fas fa-quote-right"></i>
+        </div>
+    </div>
+</div>*@
+<div class="col-lg-10 offset-lg-1 text-center">
+    <div class="testimonial-sliders">
+
+
+        @if (count.Count >= 2)
+        {
+            @foreach (var it in Model.Where(x => x.IsPopular == true))
+            {
+                <div class="single-testimonial-slider">
+                    <div class="client-avater">
+                        <img src="assets/img/avaters/avatar1.png" alt="">
+                    </div>
+                    <div class="client-meta">
+                        <h3>@it.Name @it.Surname <span>@it.Subject</span></h3>
+                        <p class="testimonial-body">
+                            " @it.Message "
+                        </p>
+                        <div class="last-icon">
+                            <i class="fas fa-quote-right"></i>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="single-testimonial-slider">
+                <div class="client-avater">
+                    <img src="assets/img/avaters/avatar1.png" alt="">
+                </div>
+                <div class="client-meta">
+                    <h3>Yoxlama 2 <span>Yoxlama 2</span></h3>
+                    <p class="testimonial-body">
+                        " Yoxlama 2 "
+                    </p>
+                    <div class="last-icon">
+                        <i class="fas fa-quote-right"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="single-testimonial-slider">
+                <div class="client-avater">
+                    <img src="assets/img/avaters/avatar1.png" alt="">
+                </div>
+                <div class="client-meta">
+                    <h3>Yoxlama <span>Yoxlama</span></h3>
+                    <p class="testimonial-body">
+                        yoxlama
+                    </p>
+                    <div class="last-icon">
+                        <i class="fas fa-quote-right"></i>
+                    </div>
+                </div>
+            </div>
+        }
+
+        @*  <div class="single-testimonial-slider">
+        <div class="client-avater">
+        <img src="assets/img/avaters/avatar2.png" alt="">
+        </div>
+        <div class="client-meta">
+        <h3>David Niph <span>Local shop owner</span></h3>
+        <p class="testimonial-body">
+        " Sed ut perspiciatis unde omnis iste natus error veritatis et quasi architecto beatae
+        vitae dict eaque ipsa quae ab illo inventore Sed ut perspiciatis unde omnis iste natus
+        error sit voluptatem accusantium "
+        </p>
+        <div class="last-icon">
+        <i class="fas fa-quote-right"></i>
+        </div>
+        </div>
+        </div>
+        <div class="single-testimonial-slider">
+        <div class="client-avater">
+        <img src="assets/img/avaters/avatar3.png" alt="">
+        </div>
+        <div class="client-meta">
+        <h3>Jacob Sikim <span>Local shop owner</span></h3>
+        <p class="testimonial-body">
+        " Sed ut perspiciatis unde omnis iste natus error veritatis et quasi architecto beatae
+        vitae dict eaque ipsa quae ab illo inventore Sed ut perspiciatis unde omnis iste natus
+        error sit voluptatem accusantium "
+        </p>
+        <div class="last-icon">
+        <i class="fas fa-quote-right"></i>
+        </div>
+        </div>
+        </div>*@
+    </div>
+</div>

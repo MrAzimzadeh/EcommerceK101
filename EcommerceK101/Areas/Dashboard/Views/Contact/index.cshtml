@@ -18,6 +18,7 @@
                             <th> Email </th>
 
                             <th> Message </th>
+                            <th> Status </th>
                             <th>
                                 Parametr
                             </th>
@@ -29,7 +30,7 @@
                             <th>Name || Surname</th>
                             <th> Subject </th>
                             <th> Email </th>
-
+                            <th>Status</th>
                             <th> Message </th>
                             <th>
                                 Parametr
@@ -53,11 +54,24 @@
                                 <th>
                                     @con.Subject
                                 </th>
+                               
                                 <th>
                                     @con.Message
                                 </th>
+                                <th>
+                                    @if (con.IsPopular == false)
+                                    {
+                                        <span class="btn btn-success">Comment</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="btn btn-dark">Testemonia</span>
+
+                                    }
+
+                                </th>
                                 <th class="d-flex">
-                                    <a href="/contact/detail/@con.Id">Detail</a>
+                                    <a class="btn btn-danger" href="/Dashboard/contact/Detail/@con.Id">Detail/Popular</a>
                                 </th>
                             </tr>
                         }

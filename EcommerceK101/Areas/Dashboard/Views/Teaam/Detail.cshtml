@@ -1,0 +1,13 @@
+﻿@model Team
+<div class="container m-auto">
+    <h1 class="h1 m-auto">
+        @Model.Name
+    </h1>
+    <img src="@Model.PhotoUrl" class="img-fluid" />
+    @foreach (var item in Model.TeamsNetworks)
+    {
+        <p>
+            <span>@item.SocialNetwork.BaseUrl</span> <span>@item.UserUrl</span>
+        </p>
+    }
+</div>

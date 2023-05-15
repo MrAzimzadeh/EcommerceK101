@@ -13,5 +13,8 @@ namespace EcommerceK101.Models
         public string Subject { get; set; }
         public string Message { get; set; }
 
+        //testemonia ucun elave sadece admin
+        public bool IsPopular { get; set; }
+
     }
 }

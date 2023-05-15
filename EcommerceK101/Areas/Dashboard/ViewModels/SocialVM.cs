@@ -2,11 +2,14 @@
 
 namespace EcommerceK101.Areas.Dashboard.ViewModels
 {
-    public class TeamVM
+    public class SocialVM
     {
-        public  List<SocialNetwork> SocialNetworks { get; set; }
+        //public int Id { get; set; }
         public Team Team { get; set; }
-        public List<Position> Positions { get; set; }
+        public List<SocialNetwork> SocialNetworks { get; set; }
+
         public List<TeamsNetwork> TeamsNetworks { get; set; }
+        
+
     }
 }

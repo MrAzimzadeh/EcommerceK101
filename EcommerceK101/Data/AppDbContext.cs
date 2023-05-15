@@ -22,6 +22,7 @@ namespace WebApp.Data
         public DbSet<SocialNetwork> SocialNetworks{ get; set; }
         public DbSet<TeamsNetwork> TeamsNetworks { get; set; }
         public DbSet<Position> Positions { get; set; }
+        public DbSet<Company> Companies { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder builder)

@@ -1,0 +1,45 @@
+﻿@model Contact
+@{
+    var et = "@";
+}
+<div class="input-group mb-3 disabled">
+    <span class="input-group-text" id="basic-addon1">@et</span>
+    <input type="text" class="form-control disabled" disabled="disabled" placeholder="Full Name : @Model.Name @Model.Surname">
+</div>
+<div class="input-group">
+    <span class="input-group-text" id="basic-addon3">Mail : </span>
+    <input type="text" class="form-control" id="basic-url" placeholder="@Model.Email" disabled="disabled">
+</div>
+<br/>
+<div class="input-group">
+    <span class="input-group-text" id="basic-addon3">Phone : </span>
+    <input type="text" class="form-control" id="basic-url" placeholder="@Model.Phone" disabled="disabled">
+</div>
+
+<div class="mb-3">
+    <label for="basic-url" class="form-label">Message : </label>
+    <div class="input-group">
+        <span class="input-group-text" id="basic-addon3">Subject : </span>
+        <input type="text" class="form-control" id="basic-url" placeholder="@Model.Subject" disabled="disabled">
+    </div>
+</div>
+
+<div class="input-group">
+    <span class="input-group-text">Message :</span>
+    <textarea class="form-control" aria-label="With textarea" disabled="disabled" placeholder="@Model.Message"></textarea>
+</div>
+
+<form method="post">
+    <div class="input-group mb-3">
+        <input type="hidden" asp-for="Email"/>
+        @*<input type="hidden" asp-for="IsPopular"/>*@
+        <input type="hidden" asp-for="Message"/>
+        <input type="hidden" asp-for="Name" />
+        <input type="hidden" asp-for="Phone" />
+        <input type="hidden" asp-for="Subject" />
+        <input type="hidden" asp-for="Surname" />
+        @Html.CheckBoxFor(x => x.IsPopular)
+        <label asp-for="IsPopular">Testemonia</label>
+    </div>
+    <input type="submit" placeholder="Update" class="btn btn-dark"/>
+</form>
