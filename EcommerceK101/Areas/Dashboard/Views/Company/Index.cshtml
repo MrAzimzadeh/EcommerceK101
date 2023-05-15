@@ -25,7 +25,6 @@
                         <tr>
                             <th>#Id</th>
                             <th>Photo</th>
-
                             <th>
                                 Parametr
                             </th>
@@ -38,14 +37,17 @@
                             <tr>
                                 <th>@tag.Id</th>
                                 <th>
-                                    <img src="@tag.Logo" width="100%" />
+                                    <img src="@tag.Logo" width="50" />
                                 </th>
-
+                           
                                 <th class="d-flex">
-                                    <a href="/dashboard/Tag/Delete/@tag.Id" class="btn btn-danger w-50">
+                                    @*  <a href="/dashboard/Tag/Detail/@tag.Id" class="btn btn-secondary">
+                                Deteil
+                                </a>*@
+                                    <a href="/dashboard/Company/Delete/@tag.Id" class="btn btn-danger w-50">
                                         Delete
                                     </a>
-                                    <a href="/dashboard/Tag/Edit/@tag.Id" class="btn btn-primary w-50">Update</a>
+                                    <a href="/dashboard/Company/Edit/@tag.Id" class="btn btn-primary w-50">Update</a>
                                 </th>
                             </tr>
                         }
