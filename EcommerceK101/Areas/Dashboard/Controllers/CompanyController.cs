@@ -49,6 +49,22 @@ namespace EcommerceK101.Areas.Dashboard.Controllers
             _context.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
-        
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var check = _context.Companies.FirstOrDefault(x => x.Id == id);
+
+            return View(check);
+        }
+        [HttpPost]
+        public IActionResult Edit(Company company , IFormFile Photo)
+        {
+             if (Photo != null)
+                    company.Logo = ImageHelper.UploadSinglePhoto(Photo, _env);
+            _context.Companies.Update(company);
+            _context.SaveChanges();
+            return RedirectToAction(nameof(Index));
+        }
+
     }
 }

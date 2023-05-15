@@ -1,11 +1,11 @@
-﻿@model IEnumerable<Company>
+﻿@model IEnumerable<Tag>
 
 <div class="container-fluid">
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">
-                <a href="/dashboard/Company/create">Create</a>
+                <a href="/dashboard/Tag/create">Create</a>
             </h6>
         </div>
         <div class="card-body">
@@ -14,7 +14,7 @@
                     <thead>
                         <tr>
                             <th>#Id</th>
-                            <th>Photo</th>
+                            <th>name</th>
 
                             <th>
                                 Parametr
@@ -24,7 +24,7 @@
                     <tfoot>
                         <tr>
                             <th>#Id</th>
-                            <th>Photo</th>
+                            <th>name</th>
 
                             <th>
                                 Parametr
@@ -38,7 +38,7 @@
                             <tr>
                                 <th>@tag.Id</th>
                                 <th>
-                                    <img src="@tag.Logo" width="100%" />
+                                    <p>@tag.Name</p>
                                 </th>
 
                                 <th class="d-flex">

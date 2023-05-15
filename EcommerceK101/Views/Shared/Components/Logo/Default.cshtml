@@ -1,0 +1,29 @@
+﻿@model List<Company>
+<div class="logo-carousel-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="logo-carousel-inner">
+                    @foreach (var logo in Model)
+                    {
+                        <div class="single-logo-item">
+                            <img src="@logo.Logo" alt="">
+                        </div>
+                    }
+                    @*	<div class="single-logo-item">
+                    <img src="~/Home/assets/img/company-logos/2.png" alt="">
+                    </div>
+                    <div class="single-logo-item">
+                    <img src="~/Home/assets/img/company-logos/3.png" alt="">
+                    </div>
+                    <div class="single-logo-item">
+                    <img src="~/Home/assets/img/company-logos/4.png" alt="">
+                    </div>
+                    <div class="single-logo-item">
+                    <img src="~/Home/assets/img/company-logos/5.png" alt="">
+                    </div>*@
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

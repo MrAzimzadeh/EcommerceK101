@@ -26,8 +26,8 @@ namespace EcommerceK101.Areas.Dashboard.Controllers
 
         public IActionResult Index()
         {
-            var tags = _context.Tags.ToList();
-            return View(tags);
+            var list = _context.Tags.ToList();
+            return View(list);
         }
 
         public IActionResult Create()

@@ -1,0 +1,20 @@
+@model Company
+<div class="container">
+    <div class="m-auto">
+        <form class="form-group" enctype="multipart/form-data" method="post">
+            <input type="hidden" asp-for="Logo" />
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <img src="@Model.Logo" class="w-50">
+                </div>
+                <hr>
+                <div class="col-lg-6">
+                    <input type="file" name="Photo" />
+                </div>
+            </div>
+            
+            <input type="submit" class="btn btn-primary" placeholder="Update" />
+        </form>
+    </div>
+</div>
